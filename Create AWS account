@@ -1,0 +1,60 @@
+AWS Account Creation Steps:
+
+1. Initial Setup:
+   - Go to AWS Sign-in page
+   - Click "Create new AWS account"
+   - Enter root user email address
+   - Choose an AWS account name (can be changed later)
+   - Verify email through verification code
+
+2. Account Security:
+   - Create a strong password
+   - Choose account type (Personal or Business)
+   - Fill in personal details:
+     - Full name
+     - Phone number
+     - Address
+     - Region selection
+
+3. Payment Information:
+   - Credit/Debit card required
+   - Used for validation purposes
+   - Small verification charge (refundable):
+     - ~$1 in US
+     - ~₹2 in India
+     - Amount varies by region
+
+4. Additional Information (for Indian users):
+   - PAN card details required
+   - Used for tax purposes
+
+ Important Notes About Billing:
+
+1. Payment Validation:
+   - AWS requires valid payment method for account creation
+   - This is primarily for verification, not automatic billing
+   - Virtual cards not recommended (may have issues)
+
+2. Billing Process:
+   - AWS won't automatically debit charges
+   - If charges occur, you'll need to pay manually
+   - Account may be suspended for unpaid charges
+
+3. Free Tier Usage:
+   - Services within free tier limits won't incur charges
+   - Important to monitor usage
+   - Stay within free tier limits to avoid charges
+
+ Recommendations:
+
+1. Payment Method:
+   - Use legitimate credit/debit card
+   - Borrow from someone if needed
+   - Avoid virtual cards/workarounds
+
+2. Account Management:
+   - Monitor usage regularly
+   - Stay within free tier limits
+   - Keep track of any billable services
+
+This account will be used for the 30-day AWS learning journey, focusing on free tier resources to minimize costs while learning the platform.
