@@ -1,1 +1,29 @@
+Q: What was the traditional approach to deploying applications 10-20 years ago?
+A: Organizations used to buy physical servers from companies like IBM or HP and create their own data centers.
 
+Q: What is a data center?
+A: A data center is where all servers are stored and configured, including network connections, proper wiring, and temperature control.
+
+Q: What was the main problem with traditional server setup?
+A: Servers were very costly and resources were often wasted. For example, if you had a server with 100GB RAM and 100 CPU cores but only used 1GB RAM and 1 CPU for an application, the remaining resources were wasted.
+
+Q: How did virtualization solve this problem?
+A: Virtualization allows the creation of multiple virtual servers on a single physical server, enabling organizations to deploy multiple applications on one physical server instead of buying separate servers for each application.
+
+Q: What is virtualization?
+A: Virtualization is a concept where you create virtual layers or virtual servers on top of a physical server, allowing better resource utilization and multiple application deployments on a single physical server.
+
+Q: What is the basic concept of cloud?
+A: Cloud is a concept where resources (like servers) are interconnected and can be accessed from anywhere, without knowing their exact physical location. Users can request and use servers without knowing where they are physically located.
+
+Q: Why is it called "cloud"?
+A: It's called cloud because resources are interconnected and accessible from anywhere, and users don't need to know the physical location of the resources they're using.
+
+Q: What is private cloud?
+A: Private cloud is when an organization manages their virtualized infrastructure entirely within their organization, with system administrators managing the resources.
+
+Q: Who traditionally managed these cloud resources?
+A: System administrators were responsible for managing cloud resources within organizations.
+
+Q: What advantage does cloud offer in terms of geographical flexibility?
+A: Cloud allows organizations to create and use virtual machines in any part of the world, making it possible for teams in different locations (like US and India) to share and use resources seamlessly.
