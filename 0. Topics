@@ -1,0 +1,105 @@
+Week 1: AWS Fundamentals
+- IAM (Identity and Access Management)
+  - Creating and managing users, groups
+  - Role-based access control
+  - Security best practices
+  - Policy creation and management
+- VPC (Virtual Private Cloud)
+  - Network design and architecture
+  - Subnet configuration
+  - Security groups and NACLs
+  - Internet and NAT gateways
+
+ Week 2: AWS Compute Services
+- EC2 (Elastic Compute Cloud)
+  - Instance types and families
+  - AMI creation and management
+  - Launch templates
+  - Auto Scaling groups
+- ECS (Elastic Container Service)
+  - Task definitions
+  - Service creation
+  - Cluster management
+  - Container instances
+
+ Week 3: Storage and Database Services
+- S3 (Simple Storage Service)
+  - Bucket creation and management
+  - Storage classes
+  - Versioning and lifecycle policies
+  - Access control
+- AWS Database Services
+  - RDS setup and management
+  - DynamoDB basics
+  - Backup and recovery
+  - Performance optimization
+
+ Week 4: AWS Developer Tools
+- CodeCommit
+  - Repository setup
+  - Git workflows
+  - Branch management
+  - Security and access
+- CodeBuild
+  - Build projects
+  - buildspec.yml configuration
+  - Custom build environments
+  - Build caching
+
+ Week 5: Continuous Integration/Deployment
+- CodePipeline
+  - Pipeline creation
+  - Stage configuration
+  - Integration with other AWS services
+  - Automated releases
+- CodeDeploy
+  - Application deployment
+  - Deployment strategies
+  - Rolling updates
+  - Blue-green deployments
+
+ Week 6: Container Services Deep Dive
+- ECR (Elastic Container Registry)
+  - Repository management
+  - Image pushing and pulling
+  - Image scanning
+  - Access control
+- EKS (Elastic Kubernetes Service)
+  - Cluster setup
+  - Node groups
+  - Kubernetes integration
+  - Service deployment
+
+ Week 7: Infrastructure as Code
+- CloudFormation
+  - Template design
+  - Stack creation and updates
+  - Parameter management
+  - Nested stacks
+- AWS CDK
+  - Infrastructure as code basics
+  - Stack deployment
+  - Resource creation
+  - Best practices
+
+ Week 8: Monitoring and Observability
+- CloudWatch
+  - Metrics and dashboards
+  - Alarms configuration
+  - Log management
+  - Custom metrics
+- AWS X-Ray
+  - Distributed tracing
+  - Service maps
+  - Performance analysis
+  - Troubleshooting
+
+ Practical Assignments for Each Week:
+1. Set up a secure AWS environment with proper IAM configurations
+2. Deploy and scale applications using EC2 and ECS
+3. Implement storage solutions and database backups
+4. Create and manage source code repositories
+5. Build CI/CD pipelines for application deployment
+6. Deploy containerized applications
+7. Create infrastructure using CloudFormation
+8. Set up monitoring and alerting for AWS resources
