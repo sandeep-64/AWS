@@ -1,5 +1,3 @@
-Amazon EC2 (Elastic Compute Cloud) - Detailed Q&A with Examples
-
 Q: What is Amazon EC2?
 A: Amazon EC2 (Elastic Compute Cloud) is a core AWS service that provides resizable compute capacity in the cloud. It's essentially a virtual computing environment that allows you to:
 - Launch virtual servers (instances) on-demand
