@@ -201,7 +201,7 @@ A: EC2 provides flexible pricing options to meet different needs:
 Q: What are the main benefits of using EC2?
 A: EC2 provides numerous advantages:
 
-1. **Scalability**
+1. Scalability
    - Instantly scale up or down based on demand
    - Auto Scaling groups for automated capacity adjustment
    - Vertical and horizontal scaling options
@@ -233,7 +233,7 @@ A: EC2 provides numerous advantages:
    - Overall monthly savings vs. fixed capacity: 40%
    ```
 
-2. **Cost Optimization**
+2. Cost Optimization
    - Pay-as-you-go pricing
    - Multiple pricing models for cost optimization
    - No upfront infrastructure costs
@@ -265,7 +265,7 @@ A: EC2 provides numerous advantages:
    - Total savings: ~$509 (70%)
    ```
 
-3. **Reliability and Security**
+3. Reliability and Security
    - Multiple Availability Zones for redundancy
    - Regular backup capabilities
    - Advanced security features
@@ -301,7 +301,7 @@ A: EC2 provides numerous advantages:
    - SMS/Email alerts
    ```
 
-4. **Flexibility**
+4. Flexibility
    - Choice of operating systems
    - Multiple instance types
    - Custom configurations
