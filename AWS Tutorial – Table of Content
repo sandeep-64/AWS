@@ -1,0 +1,130 @@
+I'll provide a clean, structured format of the AWS Tutorial content without a mind map.
+
+# AWS Tutorial Structure
+
+ 1. Introduction to AWS
+- Definition of AWS
+- History of AWS
+- Setup AWS Business Account
+- Setup Free Tier Account
+
+ 2. AWS IAM (Identity and Access Management)
+- AWS SAML
+- IAM Identities
+- IAM Roles
+- Creating IAM roles for EC2
+- Denying Access using IAM policy for EC2 and EBS Instance
+
+ 3. Computing in AWS
+
+ 3.1. AWS EC2 – Backbone of AWS
+- What is EC2
+- How to create an Instance in EC2
+- Types of EC2
+- Price Model for EC2
+- Introduction to EC2 Spot Instances
+- Create a Windows EC2 Instance and Connect Using RDP
+- Create an EC2 Instance User Data Script
+- Flexibility in EC2 Spot Instances
+- Rules for Spot Instances
+- Installation of Python3 on AWS EC2
+- Installation of GO on EC2
+- Connecting EC2 using Bastion Host
+
+ 3.2. AWS Elastic Beanstalk
+- What is EBS (Elastic Beanstalk)
+- How to Attach EBS Volume in EC2
+- Replacing Unhealthy EC2 Instances in EBS
+- Launching an Application on AWS Beanstalk
+- Add Security Group in EBS
+
+ 3.3. AWS EBS (Elastic Block Store)
+- Introduction to EBS
+- EBS Snapshot
+- Replace EC2 in EBS Environment
+- Change EBS Encryption Key
+
+ 3.4. AWS AMI
+- Definition of AMI
+- Creation of AMI
+
+ 3.5. AWS Load Balancer
+- Definition of AWS Load Balancer
+- Creation of Load Balancer
+
+ 3.6. AWS Lambda
+- AWS Lambda
+- Create an AWS Lambda Function
+- Insert data in DynamoDB using Lambda
+
+ 3.7. AWS CloudWatch
+- AWS CloudWatch
+- AWS Cloudwatch synthetics
+- Difference between CloudWatch and CloudTrail
+- Bash Scripting
+
+ 3.8. AWS AutoScaling
+- Scaling in EC2
+- Create AutoScaling Group in EC2
+
+ 3.9. Other Elastic Computes
+- What is ECS
+- What is EKS
+- Generating Log Bundle for EKS Instance
+- What is ECR
+- Difference between EBS and EFS
+
+ 4. AWS Storage Services
+- AWS S3 (including types, versioning, lifecycle management)
+- AWS Glacier
+- AWS EBS
+- AWS EFS
+- Cloud Front CDN
+- Storage Gateway
+- AWS Snowball
+- S3 Transfer Acceleration
+
+ 5. AWS Application Services
+- AWS SQS
+- AWS SWF
+- AWS SNS
+- Elastic Transcoder
+- API Gateway
+- AWS Kinesis
+- AWS Fargate
+
+ 6. AWS Database Services
+- AWS DynamoDB
+- AWS Aurora
+- AWS Redshift
+- AWS RDS
+- ElasticCache
+
+ 7. AWS VPC (Virtual Private Cloud)
+- Security in VPC
+- VPC Peering
+- Creating custom VPC
+- VPC Networking Components
+- Direct Connect
+- NAT Gateways
+- VPC Endpoints
+- VPC FlowLogs
+- NACL vs Security Group
+
+ 8. AWS Billing and Management
+- Introduction to Cost Explorer and Cost Management
+- AWS Budget Setup
+- Cost Usage and Report
+
+ 9. Machine Learning and IoT
+- AWS Sagemaker
+- Using Custom UI in Sagemaker
+- IoT Products
+
+ 10. Additional Services
+- AWS Lightsail
+- AWS CloudFormation
+- AWS Amplify
+- AWS Cognito
+- Route53
+- AWS Data Pipeline
