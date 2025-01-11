@@ -4,6 +4,30 @@ A: AWS stands for Amazon Web Services. It's an expanded cloud computing platform
 Q: How did AWS help startup companies initially?
 A: AWS helped startups by providing compute and storage services on a rental basis, which reduced the cost of manual hardware infrastructure setup.
 
+Q: How does AWS work?
+
+A: AWS works as a cloud computing platform through a global network of datacenters (called Regions) with these key components:
+
+1. Infrastructure
+   - Multiple datacenters worldwide
+   - Regions with multiple Availability Zones
+   - Secure network infrastructure
+
+2. Core Services
+   - Compute (EC2)
+   - Storage (S3)
+   - Networking (VPC)
+   - Databases
+
+3. Key Features
+   - Auto-scaling capabilities
+   - Pay-as-you-go model
+   - High availability
+   - User-friendly management console
+   - Security controls
+
+Users can access these services through a web console, CLI, or APIs to build and run applications in the cloud without managing physical hardware.
+
 Q: What are the AWS Fundamentals?
 A: Here's a concise explanation of AWS's geographical infrastructure:
 
