@@ -20,27 +20,39 @@ A: The main categories include:
 
 Q: What are the main steps to create an AWS Free Tier account?
 A: The main steps are:
+
 1. Sign up with email
+   - Open AWS Sign-up Page in any browser
+   - Enter your email address and AWS account name
+   - Click "Verify Email Address"
+   - Enter the verification code received in your email
+
 2. Set root user password
+   - Enter and confirm the Root user password
+   - Click "Continue (step 1 of 5)"
+
 3. Select account type
+   - Choose "Personal – for your own projects"
+   - Fill in personal details including:
+     - Full name
+     - Contact number
+     - Country
+     - Address
+   - Click "Continue (Step 2 of 5)"
+
 4. Enter billing information
+   - Enter billing details
+   - Click "Verify and Continue"
+
 5. Complete identity verification
+   - Confirm identity via mobile number or email
+   - Enter verification code
+   - Click "Continue"
+
 6. Select support plan
+   - Choose "Basic Support – Free"
+   - Click "Continue"
+
 7. Wait for account confirmation
-
-Q: What type of account should you select during setup for personal projects?
-A: Choose "Personal – for your own projects"
-
-Q: Which support plan should you select for a free tier account?
-A: Choose "Basic Support – Free"
-
-Q: What are the main benefits of AWS Free Tier?
-A: The main benefits include:
-1. Hands-on experience
-2. Cost-efficient learning
-3. Access to wide range of services
-4. Scalability testing
-5. Hosting small applications
-
-Q: Is AWS Free Tier available worldwide?
-A: Yes, the Free Tier is available worldwide, but certain services or features might not be available in all regions.
+   - AWS account is successfully created
+   - Account will be ready for use after confirmation
