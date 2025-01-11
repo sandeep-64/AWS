@@ -1,9 +1,6 @@
 Q: What is AWS and what does it stand for?
 A: AWS stands for Amazon Web Services. It's an expanded cloud computing platform provided by Amazon Company that offers a wide range of services with a pay-as-per-use pricing model, including storage, computing power, databases, and machine learning services.
 
-Q: What was one of AWS's first significant services?
-A: Simple Storage Service (Amazon S3), which revolutionized scalable management of storage.
-
 Q: How did AWS help startup companies initially?
 A: AWS helped startups by providing compute and storage services on a rental basis, which reduced the cost of manual hardware infrastructure setup.
 
