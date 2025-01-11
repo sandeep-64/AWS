@@ -1,60 +1,55 @@
-AWS Account Creation Steps:
+Q: What is AWS and what does it stand for?
+A: AWS stands for Amazon Web Services. It's an expanded cloud computing platform provided by Amazon Company that offers a wide range of services with a pay-as-per-use pricing model, including storage, computing power, databases, and machine learning services.
 
-1. Initial Setup:
-   - Go to AWS Sign-in page
-   - Click "Create new AWS account"
-   - Enter root user email address
-   - Choose an AWS account name (can be changed later)
-   - Verify email through verification code
+Q: What was one of AWS's first significant services?
+A: Simple Storage Service (Amazon S3), which revolutionized scalable management of storage.
 
-2. Account Security:
-   - Create a strong password
-   - Choose account type (Personal or Business)
-   - Fill in personal details:
-     - Full name
-     - Phone number
-     - Address
-     - Region selection
+Q: How did AWS help startup companies initially?
+A: AWS helped startups by providing compute and storage services on a rental basis, which reduced the cost of manual hardware infrastructure setup.
 
-3. Payment Information:
-   - Credit/Debit card required
-   - Used for validation purposes
-   - Small verification charge (refundable):
-     - ~$1 in US
-     - ~₹2 in India
-     - Amount varies by region
+Q: What are the three main fundamentals of AWS?
+A: The main fundamentals are:
+1. Regions (geographical divisions of data centers)
+2. Availability Zones (AZ) - isolated locations within regions
+3. Global Network Infrastructure
 
-4. Additional Information (for Indian users):
-   - PAN card details required
-   - Used for tax purposes
+Q: What is the purpose of Availability Zones (AZ)?
+A: Availability Zones are established as sub-sections with isolated locations to enhance fault tolerance and disaster recovery management, preventing data loss from natural calamities or other disasters.
 
- Important Notes About Billing:
+Q: What are the top AWS services mentioned?
+A: The top services mentioned are:
+- Amazon EC2 (Elastic Compute Cloud)
+- Amazon S3 (Simple Storage Service)
+- AWS Lambda
+- Amazon RDS (Relational Database Service)
+- Amazon VPC (Virtual Private Cloud)
 
-1. Payment Validation:
-   - AWS requires valid payment method for account creation
-   - This is primarily for verification, not automatic billing
-   - Virtual cards not recommended (may have issues)
+Q: What are the main advantages of AWS?
+A: The main advantages include:
+- Easy scaling of resources
+- Highly reliable and secure infrastructure
+- Wide range of services and tools
+- Pay-as-you-go pricing model
 
-2. Billing Process:
-   - AWS won't automatically debit charges
-   - If charges occur, you'll need to pay manually
-   - Account may be suspended for unpaid charges
+Q: What are the key disadvantages of AWS?
+A: The key disadvantages include:
+- Complexity of services
+- Potentially high costs
+- Security challenges
+- Limited control over some infrastructure aspects
 
-3. Free Tier Usage:
-   - Services within free tier limits won't incur charges
-   - Important to monitor usage
-   - Stay within free tier limits to avoid charges
+Q: Name some major companies using AWS and their use cases?
+A: Some examples include:
+- Netflix: For storage and scaling of applications
+- Airbnb: For managing workloads and infrastructure
+- NASA's Jet Propulsion Laboratory: For handling large-scale data analysis
+- Capital One: For secure banking services
 
- Recommendations:
+Q: What are the three cloud computing models available on AWS?
+A: The three models are:
+1. Infrastructure as a Service (IaaS) - e.g., VPC, EC2, EBS
+2. Platform as a Service (PaaS) - e.g., RDS, EMR, ElasticSearch
+3. Software as a Service (SaaS) - e.g., Salesforce.com, Office 365
 
-1. Payment Method:
-   - Use legitimate credit/debit card
-   - Borrow from someone if needed
-   - Avoid virtual cards/workarounds
-
-2. Account Management:
-   - Monitor usage regularly
-   - Stay within free tier limits
-   - Keep track of any billable services
-
-This account will be used for the 30-day AWS learning journey, focusing on free tier resources to minimize costs while learning the platform.
+Q: What is the AWS Management Console?
+A: It's a web-based interface to access AWS services, available both as a website and smartphone application, requiring an AWS account for access.
