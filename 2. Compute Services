@@ -101,33 +101,13 @@ A: EC2 offers a comprehensive set of features:
    - Custom AMIs (Amazon Machine Images)
    - Burstable performance instances
 
-   *Example: Web Application Stack*
+   *Example: Web Application Setup*
    ```
-   Production Environment Setup:
-   
-   Web Servers:
-   - Instance Type: t3.xlarge
-   - vCPUs: 4
-   - Memory: 16 GiB
-   - Network: Up to 5 Gbps
-   
-   Custom AMI Configuration:
-   - Base: Amazon Linux 2
-   - Pre-installed packages:
-     * NGINX 1.20
-     * Node.js 16
-     * Monitoring agents
-     * Security tools
-   
-   Performance Settings:
-   - CPU Credits: Unlimited mode
-   - Base performance: 40%
-   - Burst capability: Up to 100%
-   
-   Deployment Configuration:
-   - Auto Scaling group: 3-6 instances
-   - Multi-AZ distribution
-   - Launch template version: 3
+   Web Server Configuration:
+   - Instance: t3.large
+   - OS: Amazon Linux 2
+   - Pre-installed: NGINX, Node.js
+   - Auto Scaling: 2-4 instances
    ```
 
 2. Security
@@ -136,41 +116,16 @@ A: EC2 offers a comprehensive set of features:
    - IAM roles for secure access control
    - Encryption at rest and in transit
 
-   *Example: Multi-tier Security Setup*
+   *Example: Basic Security Setup*
    ```
-   Security Configuration:
+   Security Group Rules:
+   Inbound:
+   - HTTP (80) from anywhere
+   - HTTPS (443) from anywhere
+   - SSH (22) from office IP
    
-   Security Groups:
-   1. Web Tier (sg-web):
-      - Inbound: 
-        * HTTP (80) from ALB
-        * HTTPS (443) from ALB
-        * SSH (22) from bastion host
-      - Outbound: All to app tier
-   
-   2. App Tier (sg-app):
-      - Inbound: 
-        * Custom TCP (8080) from web tier
-        * SSH (22) from bastion host
-      - Outbound: All to db tier
-   
-   3. Database Tier (sg-db):
-      - Inbound: 
-        * MySQL (3306) from app tier
-        * SSH (22) from bastion host
-      - Outbound: HTTPS for updates
-   
-   IAM Role Configuration:
-   - Role: EC2-App-Role
-   - Policies:
-     * S3ReadOnly
-     * CloudWatchAgentServer
-     * SSMInstanceCore
-   
-   Encryption:
-   - EBS Volumes: AWS KMS
-   - In-transit: TLS 1.3
-   - Secrets: AWS Secrets Manager
+   Outbound:
+   - All traffic allowed
    ```
 
 3. Networking
@@ -179,35 +134,13 @@ A: EC2 offers a comprehensive set of features:
    - Virtual Private Cloud integration
    - Load balancing capabilities
 
-   *Example: Production Network Architecture*
+   *Example: Network Layout*
    ```
-   VPC Configuration:
-   
-   Network Layout:
-   - VPC CIDR: 10.0.0.0/16
-   - Public Subnets:
-     * 10.0.1.0/24 (us-east-1a)
-     * 10.0.2.0/24 (us-east-1b)
-   - Private Subnets:
-     * 10.0.3.0/24 (us-east-1a)
-     * 10.0.4.0/24 (us-east-1b)
-   
-   Load Balancer Setup:
-   - Type: Application Load Balancer
-   - Listeners: HTTP/HTTPS
-   - Target Groups:
-     * web-tg: Port 80
-     * api-tg: Port 8080
-   
-   Enhanced Networking:
-   - Elastic Network Interface
-   - ENA enabled
-   - Maximum bandwidth: 25 Gbps
-   
-   Elastic IPs:
-   - NAT Gateway: 2 EIPs
-   - Bastion Host: 1 EIP
-   - VPN Endpoint: 1 EIP
+   VPC Setup:
+   - Public subnet: 10.0.1.0/24
+   - Private subnet: 10.0.2.0/24
+   - Internet Gateway attached
+   - Application Load Balancer
    ```
 
 4. Storage Options
@@ -215,40 +148,13 @@ A: EC2 offers a comprehensive set of features:
    - Instance store for temporary storage
    - EFS integration for scalable file storage
 
-   *Example: Multi-purpose Storage Configuration*
+   *Example: Storage Configuration*
    ```
-   Storage Architecture:
-   
-   EBS Volumes:
-   1. Root Volume:
-      - Type: gp3
-      - Size: 100GB
-      - IOPS: 3000
-      - Throughput: 125 MB/s
-   
-   2. Data Volume:
-      - Type: io2
-      - Size: 500GB
-      - IOPS: 5000
-      - Throughput: 500 MB/s
-   
-   Instance Store:
-   - Type: NVMe SSD
-   - Size: 450GB
-   - Use: Cache and temp files
-   
-   EFS Configuration:
-   - Performance Mode: General Purpose
-   - Throughput Mode: Bursting
-   - Mount Points: Multiple AZs
-   - Access Points: 
-     * /efs/logs
-     * /efs/shared
-   
-   Backup Strategy:
-   - EBS: Daily snapshots
-   - EFS: AWS Backup
-   - Retention: 30 days
+   Storage Setup:
+   - Root Volume: 100GB gp3 EBS
+   - Data Volume: 500GB gp3 EBS
+   - Daily snapshots enabled
+   - Encryption enabled
    ```
 
 5. Management
@@ -257,49 +163,20 @@ A: EC2 offers a comprehensive set of features:
    - API support
    - Auto Scaling capabilities
 
-   *Example: DevOps Management Setup*
+   *Example: Basic Management*
    ```
-   Management Infrastructure:
+   Common CLI Commands:
+    Start instance
+   aws ec2 start-instances --instance-ids i-1234567890abcdef0
    
-   Auto Scaling Configuration:
-   - Min Size: 2
-   - Max Size: 8
-   - Desired: 3
-   - Scale-out: CPU > 70%
-   - Scale-in: CPU < 30%
+    Check status
+   aws ec2 describe-instances --instance-ids i-1234567890abcdef0
    
-   CLI Automation Scripts:
-   1. Instance Management:
-     ```
-      Start development instances
-     aws ec2 start-instances \
-       --instance-ids i-1234567890abcdef0
-     
-      Get instance status
-     aws ec2 describe-instance-status \
-       --instance-ids i-1234567890abcdef0
-     ```
-   
-   2. Backup Management:
-     ```
-      Create snapshots
-     aws ec2 create-snapshot \
-       --volume-id vol-1234567890abcdef0 \
-       --description "Daily backup"
-     ```
-   
-   Monitoring Setup:
-   - CloudWatch Metrics:
-     * CPU Utilization
-     * Memory Usage
-     * Disk I/O
-     * Network Traffic
-   
-   API Integration:
-   - Custom dashboard
-   - Slack notifications
-   - Automated reporting
+    Create snapshot
+   aws ec2 create-snapshot --volume-id vol-1234567890abcdef0
    ```
+
+These simplified examples demonstrate the essential implementations of EC2's key features, making them easy to understand and apply.
 
 Q: What are EC2's pricing options?
 A: EC2 provides flexible pricing options to meet different needs:
