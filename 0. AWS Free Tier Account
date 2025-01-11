@@ -1,0 +1,46 @@
+Q: What is AWS?
+A: Amazon Web Service (AWS) is the world's most comprehensive and broadly adopted cloud platform, offering over 200 fully featured services from data centers globally.
+
+Q: How long is the AWS Free Tier available for new users?
+A: AWS offers new subscribers a 12-month free tier.
+
+Q: Who is eligible for AWS Free Tier?
+A: New AWS customers who are signing up for an AWS account for the first time.
+
+Q: Do you need a payment method to sign up for the free tier?
+A: Yes, you must have a valid payment method on file when signing up, but you won't be charged unless you exceed the Free Tier limits.
+
+Q: What are the main service categories available in AWS Free Tier?
+A: The main categories include:
+- Compute (EC2)
+- Storage (EBS, EFS, S3)
+- Databases (RDS, Aurora)
+- Networking (VPC, Subnet)
+- Management Tools (Management Console, CLI)
+
+Q: What are the main steps to create an AWS Free Tier account?
+A: The main steps are:
+1. Sign up with email
+2. Set root user password
+3. Select account type
+4. Enter billing information
+5. Complete identity verification
+6. Select support plan
+7. Wait for account confirmation
+
+Q: What type of account should you select during setup for personal projects?
+A: Choose "Personal – for your own projects"
+
+Q: Which support plan should you select for a free tier account?
+A: Choose "Basic Support – Free"
+
+Q: What are the main benefits of AWS Free Tier?
+A: The main benefits include:
+1. Hands-on experience
+2. Cost-efficient learning
+3. Access to wide range of services
+4. Scalability testing
+5. Hosting small applications
+
+Q: Is AWS Free Tier available worldwide?
+A: Yes, the Free Tier is available worldwide, but certain services or features might not be available in all regions.
