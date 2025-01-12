@@ -31,7 +31,7 @@ A: IAM can be used to:
 - Manage permissions to workforce and systems to ensure least-privilege permissions
 Example: A database administrator might be given full access to RDS services but read-only access to EC2 instances, following the least-privilege principle.
 
-Here Circuityone categorizescloud them into threeננ compensation περ their17Q: What are the main components of Identity and Access Management (IAM)?
+Q: What are the main components of Identity and Access Management (IAM)?
 A: The main components of IAM are:
 - Users
 - Roles
