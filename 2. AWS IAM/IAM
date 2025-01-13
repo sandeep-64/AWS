@@ -51,13 +51,13 @@ Example:
 | Company Structure| AWS IAM Equivalent   | Examples                      |
 +------------------+----------------------+--------------------------------+
 | Employees        | IAM Users           | • John (Software Developer)    |
-|                  |                     | • Sarah (DBA)                 |
-|                  |                     | • Mike (System Admin)         |
+|                  |                     | • Sarah (DBA)                  |
+|                  |                     | • Mike (System Admin)          |
 +------------------+----------------------+--------------------------------+
-| Departments      | IAM Groups          | • Development Team            |
-|                  |                     |   - Access to EC2, S3         |
-|                  |                     | • Database Team               |
-|                  |                     |   - Access to RDS, DynamoDB   |
+| Departments      | IAM Groups          | • Development Team             |
+|                  |                     |   - Access to EC2, S3          |
+|                  |                     | • Database Team                |
+|                  |                     |   - Access to RDS, DynamoDB    |
 +------------------+----------------------+--------------------------------+
 | Job Positions    | IAM Roles           | • Senior Developer Role       |
 |                  |                     |   - Can deploy to production  |
@@ -124,23 +124,23 @@ Comparison:
 |                |   be assumed by users or       |   permissions and access      |
 |                |   AWS services                 |   rules                       |
 +----------------+--------------------------------+--------------------------------+
-| Usage         | • Temporary access             | • Permanent rules             |
-|                | • Service-to-service access    | • Attached to users/roles    |
+| Usage          | • Temporary access             | • Permanent rules             |
+|                | • Service-to-service access    | • Attached to users/roles     |
 |                | • Cross-account access         | • Define allowed actions      |
 +----------------+--------------------------------+--------------------------------+
-| Example 1:     | EKS Role:                     | EKS Policy:                   |
-| EKS Case       | • Can be assumed by EKS       | • Defines what EKS can do:   |
-|                | • Temporary credentials       |   - EC2 instance management   |
-|                | • Auto-rotated access        |   - Autoscaling rules        |
+| Example 1:     | EKS Role:                     | EKS Policy:                    |
+| EKS Case       | • Can be assumed by EKS       | • Defines what EKS can do:     |
+|                | • Temporary credentials       |   - EC2 instance management    |
+|                | • Auto-rotated access         |   - Autoscaling rules         |
 +----------------+--------------------------------+--------------------------------+
 | Example 2:     | EC2 Role:                     | S3 Access Policy:             |
-| EC2 to S3      | • Assumed by EC2 instance     | • Defines S3 permissions:    |
-|                | • No stored credentials       |   - Read/Write access        |
-|                | • Dynamic access              |   - Bucket restrictions      |
+| EC2 to S3      | • Assumed by EC2 instance     | • Defines S3 permissions:     |
+|                | • No stored credentials       |   - Read/Write access         |
+|                | • Dynamic access              |   - Bucket restrictions       |
 +----------------+--------------------------------+--------------------------------+
-| Key           | • Who/What can access         | • What can be done           |
-| Difference     | • Identity-based              | • Permission-based           |
-|                | • Can be assumed              | • Cannot be assumed          |
+| Key            | • Who/What can access         | • What can be done            |
+| Difference     | • Identity-based              | • Permission-based            |
+|                | • Can be assumed              | • Cannot be assumed           |
 +----------------+--------------------------------+--------------------------------+
 ```
 
