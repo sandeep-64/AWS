@@ -229,9 +229,7 @@ b. Select user → Delete
 ==============================================================================
 
 
- Demo 5: MFA Testing
-
- Here are the streamlined steps to create an IAM user with MFA:
+ Demo 5: IAM User created and accessed with MFA 
 
  1. Sign in to AWS Console
 - Access AWS Console → Go to IAM service
