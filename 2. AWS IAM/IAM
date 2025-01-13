@@ -115,8 +115,34 @@ Example:
 
 Q: What are IAM Roles and how are they different from policies?
 A: IAM roles are similar to IAM users but can be assumed by anyone who requires them. While policies cannot be directly given to services, roles can provide AWS Services access rights to other AWS Services. 
-Example-1: Amazon EKS needs access to EC2 instances to maintain an autoscaling group, achieved through roles.
-Example-2: An EC2 instance might need a role to access S3 buckets to store log files.
+Comparison:
+```
++----------------+--------------------------------+--------------------------------+
+| Characteristic | IAM Roles                      | IAM Policies                  |
++----------------+--------------------------------+--------------------------------+
+| Definition     | • Set of permissions that can  | • Document that defines       |
+|                |   be assumed by users or       |   permissions and access      |
+|                |   AWS services                 |   rules                       |
++----------------+--------------------------------+--------------------------------+
+| Usage         | • Temporary access             | • Permanent rules             |
+|                | • Service-to-service access    | • Attached to users/roles    |
+|                | • Cross-account access         | • Define allowed actions      |
++----------------+--------------------------------+--------------------------------+
+| Example 1:     | EKS Role:                     | EKS Policy:                   |
+| EKS Case       | • Can be assumed by EKS       | • Defines what EKS can do:   |
+|                | • Temporary credentials       |   - EC2 instance management   |
+|                | • Auto-rotated access        |   - Autoscaling rules        |
++----------------+--------------------------------+--------------------------------+
+| Example 2:     | EC2 Role:                     | S3 Access Policy:             |
+| EC2 to S3      | • Assumed by EC2 instance     | • Defines S3 permissions:    |
+|                | • No stored credentials       |   - Read/Write access        |
+|                | • Dynamic access              |   - Bucket restrictions      |
++----------------+--------------------------------+--------------------------------+
+| Key           | • Who/What can access         | • What can be done           |
+| Difference     | • Identity-based              | • Permission-based           |
+|                | • Can be assumed              | • Cannot be assumed          |
++----------------+--------------------------------+--------------------------------+
+```
 
 Q: What are IAM Policies and how are they stored?
 A: IAM Policies manage access for AWS by attaching them to IAM Identities or resources. They define permissions and validate whether requests should be allowed or denied. Policies are stored in JSON format, and multiple policies can be attached to IAM identities depending on the required permissions.
