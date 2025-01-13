@@ -45,12 +45,44 @@ Example: Think of the root user as the company owner who has complete access to 
 
 Q: What are IAM Users?
 A: IAM users are used to access the AWS Console with administrative permissions that differ from the Root user, and their login information can be tracked.
-Example: With the aid of IAM users, we can accomplish our goal of giving a specific person access to every service available in the Amazon dashboard with only a limited set of permissions, such as read-only access. Let’s say user-1 is a user that I want to have read-only access to the EC2 instance and no additional permissions, such as create, delete, or update. By creating an IAM user and attaching user-1 to that IAM user, we may allow the user access to the EC2 instance with the required permissions.
+Example:
+```
++------------+--------------------------------+-----------------+
+| IAM User   | Permissions                    | Access Level   |
++------------+--------------------------------+-----------------+
+| user-1     | • EC2 Describe Instances      | Read-Only      |
+|            | • EC2 List Instances          |                |
+|            | • EC2 Get Console Output      |                |
+|            | • EC2 View Instance Status    |                |
+|            | • EC2 View Monitoring Data    |                |
+|            | ✖ No Create Permission        |                |
+|            | ✖ No Delete Permission        |                |
+|            | ✖ No Update Permission        |                |
++------------+--------------------------------+-----------------+
+```
 
 Q: Can you explain IAM Groups with an example?
 A: A group is a collection of users, and a single person can be a member of several groups. With the aid of groups, we can manage permissions for many users quickly and efficiently.
-Example-1: Consider two users named user-1 and user-2. If we want to grant user-1 specific permissions, such as the ability to delete, create, and update the auto-calling group only, and if we want to grant user-2 all the necessary permissions to maintain the auto-scaling group as well as the ability to maintain EC2,S3 we can create groups and add this user to them. If a new user is added, we can add that user to the required group with the necessary permissions.
-Example-2: You might have a "Developers" group with EC2 and S3 access, and a "DBAdmins" group with RDS access. A full-stack developer might need to be in both groups.
+Example:
+```
++-------------+--------------------------------+-------------+
+| Group Name  | Permissions                    | Users       |
++-------------+--------------------------------+-------------+
+| ASG-Basic   | • Create Auto Scaling Groups   | user-1      |
+|             | • Delete Auto Scaling Groups   |             |
+|             | • Update Auto Scaling Groups   |             |
++-------------+--------------------------------+-------------+
+| Full-Access | • Auto Scaling Groups          | user-2      |
+|             | • EC2 access                   |             |
+|             | • S3 access                    |             |
++-------------+--------------------------------+-------------+
+| Developers  | • EC2 access                   | full-stack  |
+|             | • S3 access                    |             |
++-------------+--------------------------------+-------------+
+| DBAdmins    | • RDS access                   | db-admin    |
++-------------+--------------------------------+-------------+
+```
+
 
 Q: What are IAM Roles and how are they different from policies?
 A: IAM roles are similar to IAM users but can be assumed by anyone who requires them. While policies cannot be directly given to services, roles can provide AWS Services access rights to other AWS Services. 
