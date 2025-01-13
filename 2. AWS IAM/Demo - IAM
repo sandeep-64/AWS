@@ -1,34 +1,51 @@
 ## Demo 1: IAM User Creation, Testing & Cleanup
 
-### 1.1 Create User
-bash
-# Create user with console access
-a. IAM → Users → Create user
-b. Set details:
-   - Username: "TestUser1"
-   - Enable console access
-   - Set password: "Welcome@123" (temporary)
-c. Save credentials (download .csv)
+### 1.1 creating an IAM user with AWS Console UI access:
 
+ Step 1: Navigate to IAM
+1. Login to AWS Console as admin
+2. Go to IAM service
+3. Click "Users" in the left sidebar
+4. Click "Create user" button
 
-### 1.2 Test User Access
-bash
-a. Open new incognito window
-b. Use IAM user sign-in URL: https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console
-c. Login with TestUser1 credentials
-Expected: User can log in but sees "You don't have permissions" messages
+ Step 2: Set User Details
+1. In "User details" page:
+   - Username: TestUser1
+   - ✅ Select "Provide user access to the AWS Management Console"
+   - Select "I want to create an IAM user"
+   - For Console password:
+     - Choose "Custom password"
+     - Enter: Welcome@123
+   - ❌ Uncheck "User must create a new password at next sign-in" (for testing)
+2. Click "Next"
 
+ Step 3: Set Permissions
+1. Choose "Add user to group"
+2. Select the "BasicUsers" group we created earlier
+   - (This group should have the ReadOnlyAccess policy)
+3. Click "Next"
 
-### 1.3 Add Basic Permissions
-bash
-a. Return to admin console
-b. Attach "ReadOnlyAccess" policy to TestUser1
-c. Test again in incognito window
-Expected: User can now view but not modify resources
+ Step 4: Review and Create
+1. Review all details:
+   - Username: TestUser1
+   - AWS Management Console access: Enabled
+   - Password type: Custom
+   - Group: BasicUsers
+2. Click "Create user"
 
+ Step 5: Save Login Information
+1. Save the sign-in URL: https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console
+2. Login credentials:
+   - Username: TestUser1
+   - Password: Welcome@123
 
-### 1.4 Cleanup
-bash
+ Test the Login
+1. Open a new incognito/private browser window
+2. Go to your AWS sign-in URL
+3. Enter the username and password
+4. You should now have read-only access to AWS Console
+
+  Step 6: Cleanup
 a. IAM → Users → TestUser1
 b. Select user → Delete
 c. Type user name to confirm
