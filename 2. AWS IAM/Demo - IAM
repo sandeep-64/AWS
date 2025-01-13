@@ -1,15 +1,15 @@
-## Demo 1: IAM User Created just for login AWS console
+Demo 1: IAM User Created just for login AWS console
 
 1. IAM → Users → Create user
 2. Set only these:
-   - Username: `TestUser1`
+   - Username: TestUser1
    - ✅ Check "Provide user access to the AWS Management Console"
-   - Set password: `Welcome@123`
+   - Set password: Welcome@123
    - ❌ Uncheck "User must create new password at next sign-in"
 3. Click Next → Next → Create user (skip all permission steps)
 
 4. test login:
-1. Use your AWS sign-in URL: `https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console`
+1. Use your AWS sign-in URL: https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console
 2. Login with:
    - Username: TestUser1
    - Password: Welcome@123
@@ -20,53 +20,53 @@ b. Select user → Delete
 
 ==============================================================================
 
-## Demo 2: IAM Groups created and attached to IAM user
+ Demo 2: IAM Groups created and attached to IAM user
 
-### Part 1: Create IAM Group
+ Part 1: Create IAM Group
 1. Go to IAM Dashboard
 2. In left sidebar, click "User groups"
 3. Click "Create group" button
 4. Group creation:
-   - Group name: `TestGroup`
+   - Group name: TestGroup
    - Skip the "Attach permissions policies" section (don't select any)
    - Click "Create group"
 
-### Part 2: Add User to Group
+ Part 2: Add User to Group
 1. Go to IAM → Users
 2. Click on your user (TestUser1)
 3. Go to "Groups" tab
 4. Click "Add user to groups"
-5. Select `DemoGroup`
+5. Select DemoGroup
 6. Click "Add to groups"
 
 ==============================================================================
 
-## Demo 3: IAM User and group created and attached defined policy
+ Demo 3: IAM User and group created and attached defined policy
 
-### Part 1: Create IAM Group with Policy
+ Part 1: Create IAM Group with Policy
 1. Go to IAM Dashboard
 2. Click "User groups" in left sidebar
 3. Click "Create group"
 4. Group creation:
-   - Group name: `S3AccessGroup`
+   - Group name: S3AccessGroup
    - In "Attach permissions policies" section:
      - Search for "AmazonS3ReadOnlyAccess"
      - Select the checkbox next to it
    - Click "Create group"
 
-### Part 2: Add User to Group
+ Part 2: Add User to Group
 1. Go to IAM → Users
 2. Click on your user (TestUser1)
 3. Go to "Groups" tab
 4. Click "Add user to groups"
-5. Select `S3AccessGroup`
+5. Select S3AccessGroup
 6. Click "Add to groups"
 
-### Part 3: Test the Permissions
+ Part 3: Test the Permissions
 1. Sign out of your admin account
 2. Open new incognito window
 3. Login with TestUser1:
-   - URL: `https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console`
+   - URL: https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console
    - Username: TestUser1
    - Password: Welcome@123
 4. Test the permissions:
@@ -80,14 +80,14 @@ b. Select user → Delete
 
 ==============================================================================
 
-## Demo 4: IAM User,group and custom policy created and attached policy 
+ Demo 4: IAM User,group and custom policy created and attached policy 
 
-### Part 1: Create Custom Policy
+ Part 1: Create Custom Policy
 1. Go to IAM Dashboard
 2. Click "Policies" in left sidebar
 3. Click "Create policy"
 4. Choose JSON editor and paste this policy:
-```json
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -112,33 +112,33 @@ b. Select user → Delete
 ```
 5. Click "Next"
 6. Name the policy:
-   - Policy name: `CustomS3BucketAccess`
+   - Policy name: CustomS3BucketAccess
    - Description: "Custom policy for specific S3 bucket read access"
 7. Click "Create policy"
 
-### Part 2: Create Group with Custom Policy
+ Part 2: Create Group with Custom Policy
 1. Go to "User groups"
 2. Click "Create group"
 3. Group creation:
-   - Group name: `CustomPolicyGroup`
+   - Group name: CustomPolicyGroup
    - In "Attach permissions policies":
      - Search for your custom policy "CustomS3BucketAccess"
      - Select it
 4. Click "Create group"
 
-### Part 3: Add User to Group
+ Part 3: Add User to Group
 1. Go to IAM → Users
 2. Click on your user (TestUser1)
 3. Go to "Groups" tab
 4. Click "Add user to groups"
-5. Select `CustomPolicyGroup`
+5. Select CustomPolicyGroup
 6. Click "Add to groups"
 
-### Part 4: Test the Custom Permissions
+ Part 4: Test the Custom Permissions
 1. Sign out of admin account
 2. Open new incognito window
 3. Login with TestUser1:
-   - URL: `https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console`
+   - URL: https://[YOUR-ACCOUNT-ID].signin.aws.amazon.com/console
    - Username: TestUser1
    - Password: Welcome@123
 4. Test the permissions:
@@ -151,38 +151,87 @@ b. Select user → Delete
      - Upload/delete files
      - Access other buckets
 
+=======================================================================================
+# Demo 5: Creating and Attaching IAM Roles to AWS Services
+
+# Creating IAM Role for EC2 to Access S3
+
+ Part 1: Create IAM Role
+1. Access IAM Console
+   - Login to AWS Console
+   - Go to IAM service
+   - Click "Roles" → "Create role"
+
+2. Select Trusted Entity
+   - Choose "AWS service"
+   - Select "EC2" as use case
+   - Click "Next"
+
+ Part 2: Configure Permissions
+1. Add S3 Access Policy
+   - Search for "S3"
+   - Select AmazonS3ReadOnlyAccess
+   - Click "Next"
+
+2. Alternative: Create Custom S3 Policy
+   ```
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": [
+           "s3:ListBucket",
+           "s3:GetObject"
+         ],
+         "Resource": [
+           "arn:aws:s3:::*",
+           "arn:aws:s3:::*/*"
+         ]
+       }
+     ]
+   }
+   ```
+
+ Part 3: Complete Role Setup
+1. Role Details
+   - Name: EC2-S3-ReadOnly-Role
+   - Description: "Allows EC2 instances to read S3 buckets"
+   - Click "Create role"
+
+ Part 4: Attach Role to EC2
+1. Modify EC2 Instance
+   - Go to EC2 Console
+   - Select your instance
+   - Actions → Security → Modify IAM role
+   - Choose EC2-S3-ReadOnly-Role
+   - Click "Update IAM role"
+
+ Part 5: Verify Access
+1. EC2 Instance Connect
+
+   - Through browser
+   - Temporary SSH keys
+   - URL pattern: https://region.console.aws.amazon.com/ec2-instance-connect
+
+2. Test S3 Access
+   ```
+    Verify role
+   aws sts get-caller-identity
+
+    List all buckets
+   aws s3 ls
+
+    List specific bucket
+   aws s3 ls s3://sandeep-bucket-123/
+   ```
+
 ==============================================================================
 
-## Demo 4: IAM Role Testing
 
-### 4.1 Create Role
-bash
-a. Create IAM role for EC2
-b. Name: "TestEC2Role"
-c. Attach: AmazonS3ReadOnlyAccess
+ Demo 5: MFA Testing
 
-
-### 4.2 Test Role with EC2
-bash
-a. Launch EC2 instance:
-   - Use Amazon Linux 2
-   - Attach TestEC2Role
-   - Add tag: Name=RoleTest
-
-b. SSH into instance:
-aws s3 ls  # Should list buckets
-aws s3 mb s3://test-bucket  # Should fail
-
-
-### 4.3 Cleanup
-bash
-a. Terminate EC2 instance
-b. Delete TestEC2Role
-
-
-## Demo 5: MFA Testing
-
-### 5.1 Setup MFA
+ 5.1 Setup MFA
 bash
 a. Create user: "MFATestUser"
 b. Grant console access
@@ -192,7 +241,7 @@ c. Enable MFA:
    - Enter two consecutive codes
 
 
-### 5.2 Test MFA
+ 5.2 Test MFA
 bash
 a. Logout
 b. Login as MFATestUser
@@ -202,15 +251,15 @@ d. Test with:
    - Wrong MFA (should fail)
 
 
-### 5.3 Cleanup
+ 5.3 Cleanup
 bash
 a. Deactivate MFA
 b. Delete MFATestUser
 
 
-## Best Practices Testing
+ Best Practices Testing
 
-### 1. Password Policy Test
+ 1. Password Policy Test
 bash
 a. Set password policy:
    - Minimum length: 12
@@ -220,19 +269,19 @@ b. Test by creating new user
 c. Try changing password to weak password (should fail)
 
 
-### 2. Access Key Testing
+ 2. Access Key Testing
 bash
 a. Create access key for test user
 b. Test AWS CLI:
-   aws configure  # Enter access key details
-   aws iam get-user  # Test access
+   aws configure   Enter access key details
+   aws iam get-user   Test access
 c. Rotate access key:
    - Create new key
    - Update applications
    - Delete old key
 
 
-## Final Cleanup Checklist
+ Final Cleanup Checklist
 bash
 1. Delete all test users
 2. Delete all test groups
@@ -243,7 +292,7 @@ bash
 7. Generate credential report to verify cleanup
 
 
-## Verification Commands
+ Verification Commands
 bash
 # List all users
 aws iam list-users
