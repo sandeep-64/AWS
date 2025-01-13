@@ -231,91 +231,36 @@ b. Select user → Delete
 
  Demo 5: MFA Testing
 
- 5.1 Setup MFA
-bash
-a. Create user: "MFATestUser"
-b. Grant console access
-c. Enable MFA:
-   - Use Google Authenticator
-   - Scan QR code
+ Here are the streamlined steps to create an IAM user with MFA:
+
+ 1. Sign in to AWS Console
+- Access AWS Console → Go to IAM service
+
+ 2. Create IAM User
+1. Click "Users" → "Create user"
+2. Enter name: MFATestUser
+3. Enable console access if needed
+4. Set password
+
+ 3. Set Permissions
+1. Choose permission method:
+   - Direct policy attachment
+   - Group assignment
+2. Select required permissions
+3. Click "Next" → "Create user"
+
+ 4. Enable MFA
+1. Select created user "MFATestUser"
+2. Go to "Security credentials"
+3. Click "Assign MFA device"
+4. Choose MFA type (Virtual/Hardware)
+5. For Virtual MFA:
+   - Scan QR with authenticator app
    - Enter two consecutive codes
+   - Click "Add MFA"
 
-
- 5.2 Test MFA
-bash
-a. Logout
-b. Login as MFATestUser
-c. Verify MFA prompt appears
-d. Test with:
-   - Correct MFA (should work)
-   - Wrong MFA (should fail)
-
-
- 5.3 Cleanup
-bash
-a. Deactivate MFA
-b. Delete MFATestUser
-
-
- Best Practices Testing
-
- 1. Password Policy Test
-bash
-a. Set password policy:
-   - Minimum length: 12
-   - Require: uppercase, lowercase, numbers, symbols
-   
-b. Test by creating new user
-c. Try changing password to weak password (should fail)
-
-
- 2. Access Key Testing
-bash
-a. Create access key for test user
-b. Test AWS CLI:
-   aws configure   Enter access key details
-   aws iam get-user   Test access
-c. Rotate access key:
-   - Create new key
-   - Update applications
-   - Delete old key
-
-
- Final Cleanup Checklist
-bash
-1. Delete all test users
-2. Delete all test groups
-3. Delete custom policies
-4. Delete roles
-5. Delete test S3 buckets
-6. Remove test access keys
-7. Generate credential report to verify cleanup
-
-
- Verification Commands
-bash
-# List all users
-aws iam list-users
-
-# List groups
-aws iam list-groups
-
-# List roles
-aws iam list-roles
-
-# List policies
-aws iam list-policies --scope Local
-
-# Generate credential report
-aws iam generate-credential-report
-aws iam get-credential-report
-
-
-Important Tips:
-1. Always test permissions immediately after granting them
-2. Use AWS Policy Simulator for complex policies
-3. Keep track of all resources created during demo
-4. Use meaningful names for easy identification
-5. Document any errors encountered during testing
-6. Use AWS CloudTrail to verify actions
-7. Always verify cleanup is complete
+ 5. Share with User
+- Login URL
+- Username
+- Initial password
+- MFA setup instructions
