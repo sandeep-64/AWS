@@ -39,19 +39,19 @@
    - Username: TestUser1
    - Password: Welcome@123
 
- Test the Login
+ Step 5:Test the Login
 1. Open a new incognito/private browser window
 2. Go to your AWS sign-in URL
 3. Enter the username and password
 4. You should now have read-only access to AWS Console
 
-  Step 6: Cleanup
+  Step 7: Cleanup
 a. IAM → Users → TestUser1
 b. Select user → Delete
-c. Type user name to confirm
-d. Click "Delete"
+c. IAM → Users → BasicUser
+d. Select Group → Delete
 
-=================================================================
+==============================================================================
 
 ## Demo 2: IAM Groups with Testing & Cleanup
 
