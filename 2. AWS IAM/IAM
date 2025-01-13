@@ -45,8 +45,30 @@ A: The main components of IAM are:
 - Roles
 - Groups
 - Policies
-Example: Just like in a company organization structure, where you have employees (Users), departments (Groups), job positions (Roles), and company rules (Policies).
-
+Example: 
+```
++------------------+----------------------+--------------------------------+
+| Company Structure| AWS IAM Equivalent   | Examples                      |
++------------------+----------------------+--------------------------------+
+| Employees        | IAM Users           | • John (Software Developer)    |
+|                  |                     | • Sarah (DBA)                 |
+|                  |                     | • Mike (System Admin)         |
++------------------+----------------------+--------------------------------+
+| Departments      | IAM Groups          | • Development Team            |
+|                  |                     |   - Access to EC2, S3         |
+|                  |                     | • Database Team               |
+|                  |                     |   - Access to RDS, DynamoDB   |
++------------------+----------------------+--------------------------------+
+| Job Positions    | IAM Roles           | • Senior Developer Role       |
+|                  |                     |   - Can deploy to production  |
+|                  |                     | • Junior Developer Role       |
+|                  |                     |   - Can deploy to staging     |
++------------------+----------------------+--------------------------------+
+| Company Rules    | IAM Policies        | • No Delete Production DBs    |
+|                  |                     | • Read-only for Staging       |
+|                  |                     | • Must use MFA for Admin      |
++------------------+----------------------+--------------------------------+
+```
 Q: What is a Root User in IAM?
 A: The root user is automatically created and granted unrestricted rights. An admin user with fewer powers can be created to control the entire Amazon account.
 Example: Think of the root user as the company owner who has complete access to everything, while an admin user could be like a CEO with extensive but still limited powers.
