@@ -99,11 +99,11 @@ Example:
 | Group Name  | Permissions                    | Users       |
 +-------------+--------------------------------+-------------+
 | ASG-Basic   | • Create Auto Scaling Groups   | user-1      |
-|             | • Delete Auto Scaling Groups   |             |
+|             | • Delete Auto Scaling Groups   | user-2      |
 |             | • Update Auto Scaling Groups   |             |
 +-------------+--------------------------------+-------------+
-| Full-Access | • Auto Scaling Groups          | user-2      |
-|             | • EC2 access                   |             |
+| Full-Access | • Auto Scaling Groups          | user-3      |
+|             | • EC2 access                   |  user-4     |
 |             | • S3 access                    |             |
 +-------------+--------------------------------+-------------+
 | Developers  | • EC2 access                   | full-stack  |
