@@ -38,6 +38,34 @@ A: Amazon Elastic Compute Cloud (EC2) is an on-demand cloud computing service th
    - Test: t3.medium instances
    - Prod: t3.large with Auto Scaling
    ```
+Q: What are the main use cases of Amazon EC2, and how does it benefit different types of applications?
+
+A: Amazon EC2 serves multiple use cases across different application types:
+
+1. Application Deployment and Scaling:
+   - Supports deployment of various application types (.jar, .war, .ear)
+   - Enables dynamic scaling based on demand
+   - No need to manage underlying infrastructure
+
+2. Machine Learning Operations:
+   - Provides high-performance computing with up to 400 Gbps
+   - Offers specialized storage services for ML projects
+   - Cost-optimized infrastructure for ML workloads
+
+3. Hybrid Cloud Solutions:
+   - Allows applications to run in EC2 while connecting to on-premises databases
+   - Enables flexible hybrid architecture deployment
+   - Facilitates integration between cloud and local resources
+
+4. Gaming Applications:
+   - Cost-effective hosting for gaming servers
+   - Scalable infrastructure for varying player loads
+
+5. Cost Benefits:
+   - Pay-as-you-go pricing model
+   - Optimized price-performance ratio
+   - No upfront infrastructure investment required
+
 
 Q: What are the main instance types in EC2?
 A: EC2 offers five specialized instance types, each optimized for different use cases:
