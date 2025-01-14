@@ -400,3 +400,47 @@ A: Consider these factors:
 - Architecture (32-bit or 64-bit)
 - Cost (some AMIs have associated costs)
 - Security and compliance requirements
+
+ Q: What are the available methods to connect to the EC2 instance?
+A: There are four main methods:
+1. EC2 Instance Connect
+2. Session Manager
+3. SSH Client
+4. EC2 Serial Console
+
+ Q: How can I connect using EC2 Instance Connect?
+A: EC2 Instance Connect offers two options:
+- Standard EC2 Instance Connect: Uses browser-based client with public IPv4/IPv6 address
+- EC2 Instance Connect Endpoint: Uses browser-based client with private IPv4 address and VPC endpoint
+```
+Username: ec2-user
+Public IP: 16.170.243.65
+```
+ Q: How does Session Manager connection work?
+A: Session Manager allows connection without SSH keys but requires:
+- No SSH keys needed
+- No bastion host required
+- No inbound ports needed
+- Sessions are secured with AWS KMS
+
+ Q: What's needed for SSH client connection?
+A: SSH client connection requires:
+- A key pair (currently missing - "No associated key pair" error)
+- SSH client software
+- Instance's public DNS: ec2-16-170-243-65.eu-north-1.compute.amazonaws.com
+```
+- Command format: ssh -i "id_rsa" ec2-user@ec2-16-170-243-65.eu-north-1.compute.amazonaws.com
+```
+ Q: Can I use EC2 Serial Console?
+A: Currently not available because:
+- Account needs authorization in EC2 account settings
+- Serial port: ttyS0
+- Requires specific permissions to be granted
+- Shows "This account is not authorized" error
+
+ Q: What's the most accessible method right now?
+A: EC2 Instance Connect is the most accessible option because:
+- Works with just a valid username
+- Doesn't require key pairs
+- Can use the browser-based client
+- Has public IPv4 address available (16.170.243.65)
