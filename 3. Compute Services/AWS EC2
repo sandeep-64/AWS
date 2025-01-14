@@ -295,142 +295,59 @@ A: EC2 provides flexible pricing options to meet different needs:
    ```
 
 Q: What are the main benefits of using EC2?
-A: EC2 provides numerous advantages:
+
+A: EC2 provides four key advantages:
 
 1. Scalability
    - Instantly scale up or down based on demand
    - Auto Scaling groups for automated capacity adjustment
-   - Vertical and horizontal scaling options
    - Global reach through multiple regions
 
-   *Example: E-commerce Platform*
+   *Example:*
    ```
-   Scalability in Action:
-   Base Configuration:
-   - 3× t3.large instances (normal traffic)
-   - Load Balancer: Application Load Balancer
-   - Target tracking scaling policy
-   
-   Auto Scaling Settings:
-   - Minimum: 3 instances
-   - Maximum: 10 instances
+   Auto Scaling Configuration:
+   - Min: 2 instances
+   - Max: 6 instances
    - Scale out when CPU > 70%
    - Scale in when CPU < 30%
-   
-   Holiday Season Scenario:
-   - Black Friday traffic spike
-   - Auto-scales to 8 instances within 10 minutes
-   - Handles 3x normal traffic load
-   - Automatically scales down post-sale
-   
-   Cost Impact:
-   - Normal days: ~$180/month
-   - Peak days: ~$480/month (temporary)
-   - Overall monthly savings vs. fixed capacity: 40%
    ```
 
 2. Cost Optimization
    - Pay-as-you-go pricing
-   - Multiple pricing models for cost optimization
+   - Multiple pricing models
    - No upfront infrastructure costs
-   - Ability to choose cost-effective instance types
 
-   *Example: Development Environment*
+   *Example:*
    ```
-   Development Team Setup:
-   
-   Working Hours Configuration:
-   - Instance Type: t3.large
-   - Running Hours: 8am-6pm (Mon-Fri)
-   - Region: us-east-1
-   
-   Cost Breakdown:
-   - Hourly rate: $0.0832
-   - Daily usage: 10 hours
-   - Monthly working days: 22
-   - Monthly compute cost: $18.30
-   
-   Additional Savings:
-   - Automated start/stop using Lambda
-   - Development AMIs for quick setup
-   - Snapshot management policy
-   
-   Annual Savings vs 24/7 Running:
-   - 24/7 cost: ~$729
-   - Optimized cost: ~$220
-   - Total savings: ~$509 (70%)
+   Development Instance:
+   - t3.medium running 8hrs/day
+   - Monthly cost: ~$15
+   - 70% savings vs 24/7 running
    ```
 
 3. Reliability and Security
-   - Multiple Availability Zones for redundancy
+   - Multiple Availability Zones
    - Regular backup capabilities
    - Advanced security features
-   - Compliance with major standards
 
-   *Example: High Availability Setup*
+   *Example:*
    ```
-   Production Environment Configuration:
-   
-   Multi-AZ Deployment:
-   - Primary: us-east-1a
-     * 2× m5.xlarge (active)
-     * EBS volumes with daily snapshots
-   
-   - Secondary: us-east-1b
-     * 2× m5.xlarge (active)
-     * Synchronous data replication
-   
-   Disaster Recovery:
-   - RTO: < 10 minutes
-   - RPO: < 1 minute
-   - Automated failover testing monthly
-   
-   Security Measures:
+   High-Availability Setup:
+   - 2 AZs with load balancer
+   - Daily EBS snapshots
    - VPC with private subnets
-   - Security groups limiting access
-   - AWS Shield for DDoS protection
-   - Regular security patches
-   
-   Monitoring:
-   - CloudWatch metrics
-   - Custom dashboard
-   - SMS/Email alerts
    ```
 
 4. Flexibility
    - Choice of operating systems
    - Multiple instance types
    - Custom configurations
-   - Integration with other AWS services
 
-   *Example: Production Database*
+   *Example:*
    ```
-   Database Server Configuration:
-   
-   Instance Details:
-   - Type: r5.xlarge (Memory optimized)
-   - OS: Amazon Linux 2
-   - Storage: 500GB gp3 EBS
-   
-   Reserved Instance Terms:
-   - 1-year commitment
-   - Partial upfront payment ($1,821)
-   - Monthly payment: $152
-   
-   Integration Setup:
-   - RDS for automated backups
-   - CloudWatch for monitoring
-   - AWS Backup for disaster recovery
-   - Systems Manager for patching
-   
-   Custom Configuration:
-   - Enhanced networking enabled
-   - EBS-optimized
-   - Placement group: Cluster
-   - Instance profile with IAM roles
-   
-   Cost Analysis:
-   - On-demand cost: $4,380/year
-   - RI cost: $3,645/year
-   - Annual savings: $735 (17%)
+   Web Server Setup:
+   - Amazon Linux 2
+   - t3.large instance
+   - 100GB EBS storage
+   - Integrated with RDS
    ```
