@@ -218,8 +218,6 @@ A: EC2 offers a comprehensive set of features:
    aws ec2 create-snapshot --volume-id vol-1234567890abcdef0
    ```
 
-These simplified examples demonstrate the essential implementations of EC2's key features, making them easy to understand and apply.
-
 Q: What are EC2's pricing options?
 A: EC2 provides flexible pricing options to meet different needs:
 
@@ -351,3 +349,54 @@ A: EC2 provides four key advantages:
    - 100GB EBS storage
    - Integrated with RDS
    ```
+
+Q: What is an Amazon AMI?
+A: An Amazon Machine Image (AMI) is a template or snapshot that contains the operating system, applications, and configurations needed to launch an EC2 instance (virtual server) in AWS.
+
+Q: What does AMI contain?
+A: An AMI contains:
+- Operating system (Windows, Linux, etc.)
+- Pre-installed software and applications
+- Specific configurations and settings
+- Any custom data you've added
+
+Q: Why do we use AMIs?
+A: AMIs are used to:
+- Quickly launch new servers with pre-configured settings
+- Maintain consistency across multiple servers
+- Save time by avoiding manual installation and configuration
+- Create backups of server configurations
+
+Q: Where can I get AMIs from?
+A: You can get AMIs from three main sources:
+1. AWS-provided AMIs (default options from Amazon)
+2. AWS Marketplace (third-party vendor AMIs)
+3. Custom AMIs (created from your own EC2 instances)
+
+Q: Can I create my own AMI?
+A: Yes, you can create custom AMIs by:
+1. Setting up an EC2 instance with your desired configuration
+2. Taking a snapshot of that instance
+3. Creating an AMI from the snapshot
+
+Q: What are the benefits of using AMIs?
+A: Key benefits include:
+- Faster server deployment
+- Consistent configurations
+- Reduced human error
+- Easy scaling of infrastructure
+- Simplified backup and recovery
+
+Q: Can I share or sell my AMIs?
+A: Yes, you can:
+- Share AMIs with specific AWS accounts
+- Make them public for anyone to use
+- Sell them through the AWS Marketplace
+
+Q: How do I choose the right AMI?
+A: Consider these factors:
+- Operating system requirements
+- Region availability
+- Architecture (32-bit or 64-bit)
+- Cost (some AMIs have associated costs)
+- Security and compliance requirements
