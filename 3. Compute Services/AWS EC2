@@ -1,12 +1,26 @@
-Q: What is Amazon EC2?
-A: Amazon EC2 (Elastic Compute Cloud) is a core AWS service that provides resizable compute capacity in the cloud. It's essentially a virtual computing environment that allows you to:
-- Launch virtual servers (instances) on-demand
-- Configure security and networking
-- Manage storage
-- Scale capacity up or down based on computing requirements
-- Pay only for the resources you actually use
-- Choose from various operating systems and software configurations
-- Deploy applications across multiple geographical locations
+Q: What is Amazon EC2 and what are its key features and benefits?
+
+A: Amazon Elastic Compute Cloud (EC2) is an on-demand cloud computing service that provides virtual servers in AWS cloud. Here are its key features and benefits:
+
+1. Core Functionality:
+   - Provides virtual computing environments called "instances"
+   - Offers pre-configured templates (AMIs) with operating systems and software
+   - Allows users to rent virtual computers on a pay-as-you-go basis
+   - Deploy applications across multiple geographical locations
+
+2. Key Features:
+   - Scalability: Resizable compute capacity with the ability to scale up or down based on demand
+   - Flexibility: Users can configure RAM, ROM, and storage according to requirements
+   - Cost-Effective: Pay only for the resources you used
+   - Security: Can be configured securely using VPC, Subnets, and Security groups
+   - Auto-scaling: Can automatically adjust capacity based on application traffic
+
+3. Management Benefits:
+   - AWS manages the underlying infrastructure
+   - Easy to launch and terminate instances as needed
+   - Supports various operating systems and software configurations
+   - Provides reliable and high-performance infrastructure
+   - Meets demanding business needs with enterprise-grade capabilities
 
 *Real-world examples:*
 1. Netflix uses EC2 to stream videos to millions of users worldwide
