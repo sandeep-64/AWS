@@ -1,0 +1,44 @@
+Demo-1: Launching EC2 Instance Without Key Pair
+
+ Step 1: Instance Name and Tags
+1. Click "Launch Instance"
+2. Enter instance name (e.g., "TEST-1-nokeypair")
+
+ Step 2: Choose AMI
+1. Select "Amazon Linux 2023 AMI"
+   - AMI ID: ami-094a9a574d190f541
+   - Architecture: 64-bit (x86)
+   - Boot mode: uefi-preferred
+   - Default username: ec2-user
+
+ Step 3: Choose Instance Type
+1. Select "t3.micro" (Free tier eligible)
+   - 2 vCPU
+   - 1 GiB Memory
+
+ Step 4: Key Pair Settings
+1. Under "Key pair (login)" section
+2. Leave "Select" dropdown empty
+3. Important: This means you won't be able to SSH into the instance using key-based authentication
+
+ Step 5: Network Settings
+1. Select VPC: vpc-0f32bab413b9539d2
+2. Subnet: "No preference"
+3. Auto-assign public IP: Enable
+4. Create new security group with rules:
+   - SSH (Port 22) from anywhere
+   - HTTPS (Port 443) from internet
+   - HTTP (Port 80) from internet
+
+ Step 6: Configure Storage
+1. Volume type: gp3
+2. Size: 8 GiB
+3. IOPS: 3000
+4. Leave encryption disabled
+
+ Step 7: Review and Launch
+1. Review all configurations
+2. Click "Launch Instance"
+
+======================================================
+
