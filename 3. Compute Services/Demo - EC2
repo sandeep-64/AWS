@@ -42,3 +42,110 @@ Demo-1: Launching EC2 Instance Without Key Pair
 
 ======================================================
 
+Demo-2: Launching EC2 Instance With Key Pair
+
+ Step 1: Create a Key Pair
+1. Go to EC2 Dashboard
+2. In left navigation pane, under "Network & Security"
+3. Click "Key Pairs"
+4. Click "Create key pair"
+   - Name: "demo-keypair"
+   - Key pair type: RSA
+   - Private key file format: .pem (for OpenSSH) or .ppk (for PuTTY)
+5. Click "Create key pair"
+6. Save the downloaded key file securely
+
+ Step 2: Launch EC2 Instance
+ Basic Details
+1. Click "Launch Instance"
+2. Enter instance name (e.g., "TEST-2-withkeypair")
+
+ AMI Selection
+1. Choose "Amazon Linux 2023 AMI"
+   - AMI ID: ami-094a9a574d190f541
+   - Architecture: 64-bit (x86)
+   - Boot mode: uefi-preferred
+
+ Instance Configuration
+1. Select Instance Type: "t3.micro" (Free tier eligible)
+   - 2 vCPU
+   - 1 GiB Memory
+
+ Key Pair Configuration
+1. Under "Key pair (login)" section
+2. Select "Choose existing key pair"
+3. Select your created key pair "demo-keypair"
+4. Check the acknowledgment box
+
+ Network Settings
+1. VPC: vpc-0f32bab413b9539d2
+2. Subnet: Default (No preference)
+3. Auto-assign public IP: Enable
+4. Create new security group:
+   ```
+   Name: launch-wizard-1
+   Rules:
+   - SSH (22): Your IP or 0.0.0.0/0
+   - HTTP (80): 0.0.0.0/0
+   - HTTPS (443): 0.0.0.0/0
+   ```
+
+ Storage Configuration
+1. Volume Type: gp3
+2. Size: 8 GiB
+3. IOPS: 3000
+
+ Step 3: Launch and Connect
+1. Click "Launch Instance"
+2. Wait for instance to be running
+3. Connect using SSH:
+   ```
+    For Linux/Mac
+   chmod 400 demo-keypair.pem
+   ssh -i "demo-keypair.pem" ec2-user@<public-ip>
+
+    For Windows (PowerShell)
+   ssh -i "demo-keypair.pem" ec2-user@<public-ip>
+   ```
+
+ Important Security Notes:
+1. Key Pair Protection:
+   - Never share your private key
+   - Store .pem file securely
+   - Set appropriate file permissions (chmod 400)
+
+2. Security Best Practices:
+   - Restrict SSH access to known IP addresses
+   - Regularly rotate key pairs
+   - Use separate key pairs for different environments
+
+3. Access Management:
+   - Keep track of which key pair is used for which instance
+   - Document key pair usage in your system inventory
+   - Implement proper key rotation procedures
+
+ Free Tier Benefits:
+- 750 hours of t3.micro usage per month
+- 30 GiB of EBS storage
+- 2 million I/O operations
+- 1 GB of snapshots
+- 100 GB of internet bandwidth
+
+ Troubleshooting Tips:
+1. If unable to connect:
+   - Check security group rules
+   - Verify instance is running
+   - Confirm correct key pair usage
+   - Check network connectivity
+   - Verify correct username (ec2-user)
+
+2. Permission issues:
+   ```
+    Fix key file permissions
+   chmod 400 demo-keypair.pem
+   ```
+
+3. Connection timeout:
+   - Check security group inbound rules
+   - Verify instance has public IP
+   - Check route table configuration
