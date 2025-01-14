@@ -51,7 +51,7 @@ Demo-2: Launching EC2 Instance With Key Pair
 4. Click "Create key pair"
    - Name: "demo-keypair"
    - Key pair type: RSA
-   - Private key file format: .pem (for OpenSSH) or .ppk (for PuTTY)
+   - Private key file format: .pem (for OpenSSH or Git Bash) or .ppk (for PuTTY)
 5. Click "Create key pair"
 6. Save the downloaded key file securely
 
@@ -100,52 +100,11 @@ Demo-2: Launching EC2 Instance With Key Pair
 2. Wait for instance to be running
 3. Connect using SSH:
    ```
-    For Linux/Mac
+    For Linux/Macb - Launch GitBash from ".pem" file location
    chmod 400 demo-keypair.pem
    ssh -i "demo-keypair.pem" ec2-user@<public-ip>
 
     For Windows (PowerShell)
    ssh -i "demo-keypair.pem" ec2-user@<public-ip>
    ```
-
- Important Security Notes:
-1. Key Pair Protection:
-   - Never share your private key
-   - Store .pem file securely
-   - Set appropriate file permissions (chmod 400)
-
-2. Security Best Practices:
-   - Restrict SSH access to known IP addresses
-   - Regularly rotate key pairs
-   - Use separate key pairs for different environments
-
-3. Access Management:
-   - Keep track of which key pair is used for which instance
-   - Document key pair usage in your system inventory
-   - Implement proper key rotation procedures
-
- Free Tier Benefits:
-- 750 hours of t3.micro usage per month
-- 30 GiB of EBS storage
-- 2 million I/O operations
-- 1 GB of snapshots
-- 100 GB of internet bandwidth
-
- Troubleshooting Tips:
-1. If unable to connect:
-   - Check security group rules
-   - Verify instance is running
-   - Confirm correct key pair usage
-   - Check network connectivity
-   - Verify correct username (ec2-user)
-
-2. Permission issues:
-   ```
-    Fix key file permissions
-   chmod 400 demo-keypair.pem
-   ```
-
-3. Connection timeout:
-   - Check security group inbound rules
-   - Verify instance has public IP
-   - Check route table configuration
+  
