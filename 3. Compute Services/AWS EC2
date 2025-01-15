@@ -1,446 +1,70 @@
-Q: What is Amazon EC2 and what are its key features and benefits?
+Q: What is Amazon EC2?
+A: Amazon EC2 (Elastic Cloud Compute) is a web service that provides resizable compute capacity in the cloud. It's a virtual server combining CPU, RAM, and disk resources that can be scaled up or down based on needs.
 
-A: Amazon Elastic Compute Cloud (EC2) is an on-demand cloud computing service that provides virtual servers in AWS cloud. Here are its key features and benefits:
+Q: Why is it called "Elastic" Cloud Compute?
+A: The term "Elastic" refers to the ability to easily scale resources up or down. Users can increase or decrease computing resources, storage, and memory based on their needs, and only pay for what they use.
 
-1. Core Functionality:
-   - Provides virtual computing environments called "instances"
-   - Offers pre-configured templates (AMIs) with operating systems and software
-   - Allows users to rent virtual computers on a pay-as-you-go basis
-   - Deploy applications across multiple geographical locations
+Q: What are the five main types of EC2 instances?
+A: The five main types are:
+1. General Purpose
+2. Compute Optimized
+3. Memory Optimized
+4. Storage Optimized
+5. Accelerated Computing
 
-2. Key Features:
-   - Scalability: Resizable compute capacity with the ability to scale up or down based on demand
-   - Flexibility: Users can configure RAM, ROM, and storage according to requirements
-   - Cost-Effective: Pay only for the resources you used
-   - Security: Can be configured securely using VPC, Subnets, and Security groups
-   - Auto-scaling: Can automatically adjust capacity based on application traffic
+Q: When would you use a Compute Optimized instance?
+A: Compute Optimized instances are best for workloads requiring high processing power, such as:
+- Machine learning applications
+- Gaming servers
+- High-performance computing
+- Batch processing workloads
 
-3. Management Benefits:
-   - AWS manages the underlying infrastructure
-   - Easy to launch and terminate instances as needed
-   - Supports various operating systems and software configurations
-   - Provides reliable and high-performance infrastructure
-   - Meets demanding business needs with enterprise-grade capabilities
+Q: When would you use a Memory Optimized instance?
+A: Memory Optimized instances are ideal for workloads that process large datasets in memory, such as:
+- Real-time big data analytics
+- High-performance databases
+- In-memory databases
+- Large-scale enterprise applications
 
-*Real-world examples:*
-1. Netflix uses EC2 to stream videos to millions of users worldwide
-2. Small Business Website:
-   ```
-   Configuration Example:
-   - t3.micro instance running WordPress
-   - EBS volume: 20GB for storage
-   - Elastic IP for static address
-   ```
-3. Development Team Setup:
-   ```
-   Environment:
-   - Dev: t3.small instances
-   - Test: t3.medium instances
-   - Prod: t3.large with Auto Scaling
-   ```
-Q: What are the main use cases of Amazon EC2, and how does it benefit different types of applications?
+Q: What are AWS Regions and why are they important?
+A: AWS Regions are geographical locations where AWS has data centers. They're important for:
+- Meeting data sovereignty requirements
+- Reducing latency for users
+- Ensuring compliance with local regulations
+- Providing disaster recovery options
 
-A: Amazon EC2 serves multiple use cases across different application types:
+Q: What is an Availability Zone?
+A: An Availability Zone is an isolated location within an AWS Region that contains one or more data centers. Each Region has multiple AZs to provide redundancy and high availability for applications.
 
-1. Application Deployment and Scaling:
-   - Supports deployment of various application types (.jar, .war, .ear)
-   - Enables dynamic scaling based on demand
-   - No need to manage underlying infrastructure
+Q: What is a key pair in EC2?
+A: A key pair consists of a public key and private key that are used to securely connect to an EC2 instance. The public key is stored on the instance, while the private key is kept by the user to authenticate SSH connections.
 
-2. Machine Learning Operations:
-   - Provides high-performance computing with up to 400 Gbps
-   - Offers specialized storage services for ML projects
-   - Cost-optimized infrastructure for ML workloads
+Q: What is the free tier limit for EC2?
+A: AWS Free Tier includes 750 hours per month of t2.micro instances (1 CPU, 1GB RAM) for one year. This equals running one instance 24/7 for the month, or multiple instances within the 750-hour limit.
 
-3. Hybrid Cloud Solutions:
-   - Allows applications to run in EC2 while connecting to on-premises databases
-   - Enables flexible hybrid architecture deployment
-   - Facilitates integration between cloud and local resources
-
-4. Gaming Applications:
-   - Cost-effective hosting for gaming servers
-   - Scalable infrastructure for varying player loads
-
-5. Cost Benefits:
-   - Pay-as-you-go pricing model
-   - Optimized price-performance ratio
-   - No upfront infrastructure investment required
-
-
-Q: What are the main instance types in EC2?
-A: EC2 offers five specialized instance types, each optimized for different use cases:
-
-1. General Purpose (T3, M5)
-   - Balanced CPU-to-memory ratio
-   - Ideal for web servers, small databases, development environments
-   - Good for applications that use resources in equal proportions
-
-   *Example:*
-   ```
-   Web Application Stack:
-   - Frontend: 2× t3.medium
-   - Backend: 2× m5.large
-   - Load Balancer: Application Load Balancer
-   ```
-
-2. Compute Optimized (C5, C6g)
-   - High-performance processors
-   - Perfect for batch processing, media transcoding, high-performance web servers
-   - Best for CPU-intensive applications
-
-   *Example:*
-   ```
-   Video Processing Service:
-   - Encoding servers: 4× c5.2xlarge
-   - Queue processing: c5.large
-   ```
-
-3. Memory Optimized (R5, X1e)
-   - Designed for memory-intensive applications
-   - Excellent for high-performance databases, real-time big data analytics
-   - In-memory caches and large-scale enterprise applications
-
-   *Example:*
-   ```
-   In-Memory Database Setup:
-   - Primary DB: r5.2xlarge for Redis
-   - Analytics: r5.4xlarge for SAP HANA
-   - Caching Layer: r5.large instances
-   ```
-
-4. Storage Optimized (I3, D2)
-   - High, sequential read/write access to large datasets
-   - Perfect for data warehousing, log processing
-   - High frequency online transaction processing (OLTP) systems
-
-   *Example:*
-   ```
-   Data Warehouse Configuration:
-   - Main Storage: 2× i3.2xlarge
-   - Log Processing: d2.2xlarge
-   - Backup Storage: i3.large
-   ```
-
-5. Accelerated Computing (P3, G4)
-   - Hardware accelerators or co-processors
-   - Ideal for machine learning, cryptocurrency mining
-   - 3D applications and game streaming
-
-   *Example:*
-   ```
-   ML Training Environment:
-   - Training Cluster: 2× p3.2xlarge with GPU
-   - Inference: g4dn.xlarge
-   - Development: g4dn.large
-   ```
-
-Q: What are the key features of EC2?
-A: EC2 offers a comprehensive set of features:
-
-1. Computing Environment
-   - Multiple instance types
-   - Bare metal instances
-   - Custom AMIs (Amazon Machine Images)
-   - Burstable performance instances
-
-   *Example: Web Application Setup*
-   ```
-   Web Server Configuration:
-   - Instance: t3.large
-   - OS: Amazon Linux 2
-   - Pre-installed: NGINX, Node.js
-   - Auto Scaling: 2-4 instances
-   ```
-
-2. Security
-   - Security groups for firewall configuration
-   - VPC integration for network isolation
-   - IAM roles for secure access control
-   - Encryption at rest and in transit
-
-   *Example: Basic Security Setup*
-   ```
-   Security Group Rules:
-   Inbound:
-   - HTTP (80) from anywhere
-   - HTTPS (443) from anywhere
-   - SSH (22) from office IP
-   
-   Outbound:
-   - All traffic allowed
-   ```
-
-3. Networking
-   - Enhanced networking
-   - Elastic IP addresses
-   - Virtual Private Cloud integration
-   - Load balancing capabilities
-
-   *Example: Network Layout*
-   ```
-   VPC Setup:
-   - Public subnet: 10.0.1.0/24
-   - Private subnet: 10.0.2.0/24
-   - Internet Gateway attached
-   - Application Load Balancer
-   ```
-
-4. Storage Options
-   - EBS volumes for persistent storage
-   - Instance store for temporary storage
-   - EFS integration for scalable file storage
-
-   *Example: Storage Configuration*
-   ```
-   Storage Setup:
-   - Root Volume: 100GB gp3 EBS
-   - Data Volume: 500GB gp3 EBS
-   - Daily snapshots enabled
-   - Encryption enabled
-   ```
-
-5. Management
-   - AWS Management Console
-   - Command Line Interface (CLI)
-   - API support
-   - Auto Scaling capabilities
-
-   *Example: Basic Management*
-   ```
-   Common CLI Commands:
-    Start instance
-   aws ec2 start-instances --instance-ids i-1234567890abcdef0
-   
-    Check status
-   aws ec2 describe-instances --instance-ids i-1234567890abcdef0
-   
-    Create snapshot
-   aws ec2 create-snapshot --volume-id vol-1234567890abcdef0
-   ```
-
-Q: What are EC2's pricing options?
-A: EC2 provides flexible pricing options to meet different needs:
-
-1. On-Demand Instances
-   - Pay by the hour/second with no commitments
-   - Ideal for short-term, irregular workloads
-   - No upfront costs or long-term contracts
-   - Best for developing and testing applications
-
-   *Example:*
-   ```
-   Development Environment:
-   - Instance: t3.large
-   - Region: us-east-1
-   - Usage: 40 hours per week
-   - Cost calculation:
-     $0.0832 per hour × 40 hours × 4 weeks = ~$13.31 per month
-   
-   Use Case: A startup developing a new application
-   - Dev servers run during business hours only
-   - Shut down nights and weekends
-   - Scale up/down as needed without commitment
-   ```
-
-2. Reserved Instances (RI)
-   - Up to 72% discount compared to On-Demand
-   - 1 or 3-year term commitments
-   - Payment options: All upfront, Partial upfront, No upfront
-   - Perfect for steady-state workloads
-
-   *Example:*
-   ```
-   Production Database Server:
-   - Instance: r5.xlarge
-   - Term: 1 year
-   - Payment: Partial upfront
-   - Savings calculation:
-     On-Demand: $0.252 per hour × 24 × 365 = $2,207.52
-     Reserved (Partial Upfront):
-     - Upfront: $1,000
-     - Monthly: $83.84
-     - Total Annual Cost: $2,006.08
-     - Annual Savings: ~40%
-   
-   Use Case: E-commerce platform
-   - 24/7 operation required
-   - Predictable workload
-   - Consistent resource needs
-   ```
-
-3. Spot Instances
-   - Up to 90% discount compared to On-Demand
-   - Prices fluctuate based on supply and demand
-   - Instances can be terminated with short notice
-   - Ideal for flexible start and end times
-
-   *Example:*
-   ```
-   Batch Processing Job:
-   - Instance: c5.2xlarge
-   - Regular price (On-Demand): $0.34 per hour
-   - Spot price range: $0.0952 - $0.1496 per hour
-   - Potential savings: 56-72%
-   
-   Use Case: Data analytics pipeline
-   - Daily log processing job
-   - 4-hour processing window
-   - Fault-tolerant architecture
-   - Monthly cost comparison:
-     On-Demand: $0.34 × 4 × 30 = $40.80
-     Spot (avg): $0.12 × 4 × 30 = $14.40
-     Monthly Savings: ~$26.40 (65%)
-   ```
-
-Q: What are the main benefits of using EC2?
-
-A: EC2 provides four key advantages:
-
-1. Scalability
-   - Instantly scale up or down based on demand
-   - Auto Scaling groups for automated capacity adjustment
-   - Global reach through multiple regions
-
-   *Example:*
-   ```
-   Auto Scaling Configuration:
-   - Min: 2 instances
-   - Max: 6 instances
-   - Scale out when CPU > 70%
-   - Scale in when CPU < 30%
-   ```
-
-2. Cost Optimization
-   - Pay-as-you-go pricing
-   - Multiple pricing models
-   - No upfront infrastructure costs
-
-   *Example:*
-   ```
-   Development Instance:
-   - t3.medium running 8hrs/day
-   - Monthly cost: ~$15
-   - 70% savings vs 24/7 running
-   ```
-
-3. Reliability and Security
-   - Multiple Availability Zones
-   - Regular backup capabilities
-   - Advanced security features
-
-   *Example:*
-   ```
-   High-Availability Setup:
-   - 2 AZs with load balancer
-   - Daily EBS snapshots
-   - VPC with private subnets
-   ```
-
-4. Flexibility
-   - Choice of operating systems
-   - Multiple instance types
-   - Custom configurations
-
-   *Example:*
-   ```
-   Web Server Setup:
-   - Amazon Linux 2
-   - t3.large instance
-   - 100GB EBS storage
-   - Integrated with RDS
-   ```
-
-Q: What is an Amazon AMI?
-A: An Amazon Machine Image (AMI) is a template or snapshot that contains the operating system, applications, and configurations needed to launch an EC2 instance (virtual server) in AWS.
-
-Q: What does AMI contain?
-A: An AMI contains:
-- Operating system (Windows, Linux, etc.)
-- Pre-installed software and applications
-- Specific configurations and settings
-- Any custom data you've added
-
-Q: Why do we use AMIs?
-A: AMIs are used to:
-- Quickly launch new servers with pre-configured settings
-- Maintain consistency across multiple servers
-- Save time by avoiding manual installation and configuration
-- Create backups of server configurations
-
-Q: Where can I get AMIs from?
-A: You can get AMIs from three main sources:
-1. AWS-provided AMIs (default options from Amazon)
-2. AWS Marketplace (third-party vendor AMIs)
-3. Custom AMIs (created from your own EC2 instances)
-
-Q: Can I create my own AMI?
-A: Yes, you can create custom AMIs by:
-1. Setting up an EC2 instance with your desired configuration
-2. Taking a snapshot of that instance
-3. Creating an AMI from the snapshot
-
-Q: What are the benefits of using AMIs?
-A: Key benefits include:
-- Faster server deployment
-- Consistent configurations
-- Reduced human error
-- Easy scaling of infrastructure
-- Simplified backup and recovery
-
-Q: Can I share or sell my AMIs?
-A: Yes, you can:
-- Share AMIs with specific AWS accounts
-- Make them public for anyone to use
-- Sell them through the AWS Marketplace
-
-Q: How do I choose the right AMI?
-A: Consider these factors:
-- Operating system requirements
-- Region availability
-- Architecture (32-bit or 64-bit)
-- Cost (some AMIs have associated costs)
-- Security and compliance requirements
-
- Q: What are the available methods to connect to the EC2 instance?
-A: There are four main methods:
-1. EC2 Instance Connect
-2. Session Manager
-3. SSH Client
-4. EC2 Serial Console
-
- Q: How can I connect using EC2 Instance Connect?
-A: EC2 Instance Connect offers two options:
-- Standard EC2 Instance Connect: Uses browser-based client with public IPv4/IPv6 address
-- EC2 Instance Connect Endpoint: Uses browser-based client with private IPv4 address and VPC endpoint
+Q: How can you connect to an EC2 instance?
+A: You can connect to an EC2 instance using SSH with the private key:
+```bash
+chmod 600 keyname.pem
+ssh -i keyname.pem ubuntu@public-ip-address
 ```
-Username: ec2-user
-Public IP: 16.170.243.65
-```
- Q: How does Session Manager connection work?
-A: Session Manager allows connection without SSH keys but requires:
-- No SSH keys needed
-- No bastion host required
-- No inbound ports needed
-- Sessions are secured with AWS KMS
 
- Q: What's needed for SSH client connection?
-A: SSH client connection requires:
-- A key pair (currently missing - "No associated key pair" error)
-- SSH client software
-- Instance's public DNS: ec2-16-170-243-65.eu-north-1.compute.amazonaws.com
-```
-- Command format: ssh -i "id_rsa" ec2-user@ec2-16-170-243-65.eu-north-1.compute.amazonaws.com
-```
- Q: Can I use EC2 Serial Console?
-A: Currently not available because:
-- Account needs authorization in EC2 account settings
-- Serial port: ttyS0
-- Requires specific permissions to be granted
-- Shows "This account is not authorized" error
+Q: What is a Security Group?
+A: A Security Group acts as a virtual firewall for EC2 instances to control inbound and outbound traffic. It contains rules that determine which network traffic is allowed to reach the instance.
 
- Q: What's the most accessible method right now?
-A: EC2 Instance Connect is the most accessible option because:
-- Works with just a valid username
-- Doesn't require key pairs
-- Can use the browser-based client
-- Has public IPv4 address available (16.170.243.65)
+Q: Why should you choose a specific region for your EC2 instance?
+A: Region selection should be based on:
+- Proximity to end users (to reduce latency)
+- Compliance requirements
+- Data sovereignty laws
+- Cost (prices vary by region)
+- Service availability
+
+Q: What happens to an EC2 instance when you stop it vs. terminate it?
+A: When you stop an instance, it remains in your account and maintains its data, but you're not charged for compute time. When you terminate an instance, it's permanently deleted and all data is lost unless backed up.
+
+Q: What is the difference between public and private IP in EC2?
+A: A public IP is accessible from the internet and changes when the instance is stopped/started. A private IP is used for internal communication within the VPC and remains constant throughout the instance's lifetime.
+
+Q: What is the minimum and maximum size of an EC2 instance?
+A: The minimum size in free tier is t2.micro (1 CPU, 1GB RAM). The maximum size varies by instance type, but can go up to 448 vCPUs and 24,576 GiB of memory for memory-optimized instances.
