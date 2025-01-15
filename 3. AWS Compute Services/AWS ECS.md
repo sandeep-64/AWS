@@ -22,12 +22,6 @@ A: A container instance is an individual EC2 instance that is part of an ECS clu
 ### Q: How does ECS handle scalability?
 A: ECS automatically scales containers up or down based on traffic demands. This dynamic scaling ensures optimal resource utilization and application performance.
 
-### Q: What makes containers portable in ECS?
-A: Containers are portable because they are independent of the underlying operating system and include all necessary dependencies. This ensures consistent application behavior across different environments.
-
-### Q: What is a container in ECS?
-A: A container is a package that contains an application and all its dependencies and libraries, making it portable and ensuring consistent operation regardless of the underlying environment.
-
 ### Q: What are the two launch types in ECS?
 A: ECS offers two launch types: Fargate launch (serverless, AWS manages infrastructure) and EC2 launch (more customizable, user manages EC2 instances).
 
