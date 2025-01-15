@@ -128,3 +128,7 @@ Use both layers for defense-in-depth:
 - Security Groups for fine-grained control at instance level
 - NACLs for broad subnet-level security policies and blocking known bad actors
 
+## Project Implemented in the video
+
+
+![Screenshot 2023-06-29 at 12 14 32 AM](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/30bbc9e8-6502-438b-8adf-ece8b81edce9)
