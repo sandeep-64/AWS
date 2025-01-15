@@ -68,7 +68,7 @@ Try these modifications to learn more:
 1. Add query parameters handling:
 ```
 def lambda_handler(event, context):
-     Get name from query string parameters
+    # Get name from query string parameters
     name = event.get('queryStringParameters', {}).get('name', 'World')
     
     return {
@@ -119,10 +119,3 @@ When done experimenting:
 - Monitor execution time to stay within free tier
 - Test different triggers and integrations
 - Use environment variables for configuration
-
-This demo gives you hands-on experience with:
-- Creating Lambda functions
-- Setting up API triggers
-- Testing and monitoring
-- Basic error handling
-- AWS Free Tier usage
