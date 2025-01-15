@@ -1,11 +1,27 @@
-### Q: What is a VPC?
-A: A Virtual Private Cloud (VPC) is a secure, isolated private section of AWS cloud where you can launch AWS resources in a network that you define.
-
-### Q: Why do we need VPC?
-A: VPC is needed for network isolation, enhanced security, resource organization, preventing unauthorized access between applications, and creating separate environments for different projects/applications.
+### Q: What is a VPC and why do we need it?
+A: A Virtual Private Cloud (VPC) is a secure, isolated private section of AWS cloud where you can launch AWS resources in a network that you define. Think of it as having your own private section of the internet within AWS cloud - like your own isolated network where you can set up servers, databases, and other resources securely. We need VPCs for:
+- Network isolation
+- Enhanced security
+- Resource organization
+- Preventing unauthorized access between applications
+- Creating separate environments for different projects/applications
 
 ### Q: What are the main components of a VPC?
 A: The main components are Internet Gateway (IGW), Subnets (Public and Private), Route Tables, Network ACLs (NACLs), Security Groups, and NAT Gateway.
+
+### Q: What are all the components of a VPC?
+A: The main components are:
+- VPC (the main network container)
+- Subnets (ranges of IP addresses in VPC)
+- IP addressing (IPv4 and IPv6)
+- Network ACLs (subnet-level firewall)
+- Security Groups (instance-level firewall)
+- Route Tables (traffic direction rules)
+- NAT Gateways and Endpoints
+- Peering Connections
+- Transit Gateways
+- VPC Flow Logs
+- VPN Connections
 
 ### Q: What is an Internet Gateway?
 A: It's a VPC component that allows communication between your VPC and the internet. It acts as a gateway or entry/exit point for traffic.
@@ -41,3 +57,38 @@ A: Best practices include:
 - Implementing proper security controls
 - Enabling VPC Flow Logs for monitoring
 - Using NAT Gateway for private subnet internet access
+
+### Q: Does AWS provide a VPC by default?
+A: Yes, AWS creates a default VPC when you create an AWS account. However, this default VPC is just to get started - it's recommended to create separate VPCs for different applications or projects.
+
+![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/12cc10b6-724c-42c9-b07b-d8a7ce124e24)
+
+### Q: What's the difference between a Gateway and an Endpoint?
+A: A gateway connects your VPC to another network (like the internet), while a VPC endpoint allows you to privately connect to AWS services without using an internet gateway or NAT device.
+
+### Q: What is VPC Peering?
+A: VPC peering is a networking connection between two VPCs that enables you to route traffic between them privately, as if they're in the same network.
+
+### Q: What is a Transit Gateway?
+A: A transit gateway acts as a central hub that manages traffic between multiple VPCs, VPN connections, and AWS Direct Connect connections, simplifying network architecture.
+
+### Q: What is Traffic Mirroring?
+A: Traffic mirroring copies network traffic from network interfaces and sends it to security and monitoring appliances for deep packet inspection and analysis.
+
+### Q: Can I bring my own IP addresses to AWS VPC?
+A: Yes, you can bring your public IPv4 and IPv6 GUA addresses to AWS and allocate them to resources in your VPC, such as EC2 instances, NAT gateways, and Network Load Balancers.
+
+### Q: How can I connect my on-premises network to VPC?
+A: You can connect your on-premises network to your VPC using AWS Virtual Private Network (AWS VPN) connections, establishing secure communication between your local network and AWS resources.
+
+### Q: What's the purpose of having subnets in different Availability Zones?
+A: Subnets must reside in a single Availability Zone, and spreading subnets across multiple AZs provides high availability and fault tolerance for your applications.
+
+### Q: How do Route Tables work in a VPC?
+A: Route tables determine where network traffic from your subnet or gateway is directed. They contain rules (routes) that decide the path network packets should take to reach their destination.
+
+## VPC with servers in private subnets and NAT
+
+https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
+
+![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/89d8316e-7b70-4821-a6bf-67d1dcc4d2fb)
