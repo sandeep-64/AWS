@@ -156,7 +156,7 @@ A:
 - Used when applications need to access AWS resources
 - Common in CI/CD pipelines and external integrations
 - Different from IAM users as they're not tied to specific people
-
+Example: IAM Roles are like security badges that give temporary access to AWS services. Think of them as permissions that can be "borrowed" rather than permanently assigned.
 
 Q: Does IAM provide any replica or backup?
 A: No, IAM doesn't provide any replica or backup.
