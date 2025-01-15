@@ -32,6 +32,16 @@ A: The five main types of EC2 instances are:
    - For: Machine learning, graphics processing, scientific computing
    - Example: p3.2xlarge
 
+Q: What does each part of the EC2 instance name "c5n.xlarge" represent?
+
+A: The EC2 instance name "c5n.xlarge" breaks down into three distinct parts:
+This naming convention helps identify the instance's characteristics at a glance - in this case, it's a 5th generation compute-optimized instance with enhanced networking capabilities and extra-large size configuration.
+
+1. Instance Family (c): Compute-optimized instance type
+2. Generation (5): The 5th generation of this instance family
+3. Attribute (n): Network-optimized capability
+4. Instance Size (xlarge): The relative size/capacity of the instance
+
 
 Q: What are AWS Regions and why are they important?
 A: AWS Regions are geographical locations where AWS has data centers. They're important for:
@@ -44,7 +54,7 @@ Q: What is an Availability Zone?
 A: An Availability Zone is an isolated location within an AWS Region that contains one or more data centers. Each Region has multiple AZs to provide redundancy and high availability for applications.
 
 Q: What is a key pair in EC2?
-A: A key pair consists of a public key and private key that are used to securely connect to an EC2 instance. The public key is stored on the instance, while the private key is kept by the user to authenticate SSH connections.
+A: A key pair consists of a public key and a private key that are used to connect to an EC2 instance securely. The public key is stored on the instance, while the private key is kept by the user to authenticate SSH connections.
 
 Q: What is the free tier limit for EC2?
 A: AWS Free Tier includes 750 hours per month of t2.micro instances (1 CPU, 1GB RAM) for one year. This equals running one instance 24/7 for the month, or multiple instances within the 750-hour limit.
