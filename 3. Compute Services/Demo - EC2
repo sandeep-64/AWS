@@ -110,10 +110,10 @@ Demo-2: Launching EC2 Instance With Key Pair
   
 =========================================================
 
-# Quick EC2 Setup Guide with Jenkins
+Demo-3: Launching EC2 Instance and install jenkins 
 
-## 1. Launch EC2
-```bash
+ 1. Launch EC2
+```
 AWS Console → EC2 → Launch Instance
 
 # Basic Config
@@ -126,15 +126,15 @@ Security Group: New
 Storage: 8GB GP2
 ```
 
-## 2. Security Group Settings
-```bash
+ 2. Security Group Settings
+```
 Inbound Rules:
 - SSH (22): Your IP
 - Custom TCP (8080): Anywhere (Jenkins)
 ```
 
-## 3. Connect to EC2
-```bash
+ 3. Connect to EC2
+```
 # Linux/Mac
 chmod 600 AWS_login.pem
 ssh -i AWS_login.pem ubuntu@<public-ip>
@@ -143,8 +143,8 @@ ssh -i AWS_login.pem ubuntu@<public-ip>
 Use PuTTY/MobaXterm
 ```
 
-## 4. Install Jenkins
-```bash
+ 4. Install Jenkins
+```
 # Update & Install Java
 sudo apt update
 sudo apt install openjdk-11-jdk -y
@@ -163,8 +163,8 @@ sudo systemctl start jenkins
 sudo systemctl status jenkins
 ```
 
-## 5. Access Jenkins
-```bash
+ 5. Access Jenkins
+```
 # Get initial password
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
@@ -172,18 +172,16 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 http://<public-ip>:8080
 ```
 
-## Key Points
+ Key Points
 - Keep .pem file secure
 - Stop/terminate instance when not in use
 - Free tier: 750hrs/month
 - Update security patches regularly
 - Monitor costs
 
-## Troubleshooting
+ Troubleshooting
 - Check instance running
 - Verify security group rules
 - Confirm key permissions
 - Validate public IP
 - Test port 8080 access
-
-That's it! You've got a running EC2 instance with Jenkins installed. 🚀
