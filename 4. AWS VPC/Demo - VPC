@@ -1,79 +1,100 @@
 Demo-1: creating and configuring a VPC with security settings in AWS:
 
-1. VPC Creation:
-   - Navigate to VPC dashboard
-   - Select "VPC and more" option for automated resource creation
-   - Name the VPC (demo VPC)
-   - Keep default CIDR block (10.0.0.0/16 for 65,536 IPs)
-   - Customize AZs (eu-north-1a)
-   - Number of public subnets
-   - Allow VPC endpoints for S3 Gateway
-   - Create VPC (AWS automatically creates subnets, route tables, internet gateway)
+ 1. VPC Creation and Setup
+ Initial Configuration
+- Navigate to VPC dashboard in AWS Console
+- Select "VPC and more" for automated resource creation
+- Configure basic settings:
+  - Name: demo VPC
+  - CIDR: 10.0.0.0/16 (65,536 IPs)
+  - Availability Zone: eu-north-1a
+  - Enable public subnets
+  - Enable VPC endpoints for S3 Gateway
 
-2. EC2 Instance Setup:
-   - Launch new EC2 instance
-   - Name: demo-instance
-   - Choose Ubuntu AMI with t2.micro
-   - Configure network settings:
-     - Click on Edit Option
-     - Select custom VPC (not default)
-     - Choose public subnet
-     - Enable auto-assign public IP
-     - Create new security group
-   - Launch instance
+ Automatic Resource Creation
+AWS automatically creates:
+- Subnets
+- Route tables
+- Internet gateway
 
-3. Application Deployment:
+ 2. EC2 Instance Deployment
+ Instance Configuration
+- Launch new EC2 instance
+- Basic settings:
+  - Name: demo-instance
+  - AMI: Ubuntu
+  - Instance type: t2.micro
+
+ Network Settings
+- Click "Edit" in network settings
+- Select:
+  - VPC: Choose demo VPC (not default)
+  - Subnet: Select public subnet
+  - Auto-assign public IP: Enable
+  - Security group: Create new
+
+ 3. Application Deployment
+ SSH Access
+```
+ssh -i aws_login.pem ubuntu@[public-ip]
+```
+
+ Server Setup
+```
+# Update system packages
+sudo apt update
+
+# Start Python HTTP server
+python3 -m http.server 8000
+```
+
+ 4. Security Group Configuration
+ Initial Settings
+- Default configuration:
+  - Allows port 22 (SSH) only
+
+ Adding HTTP Server Access
+- Add inbound rule:
+  - Type: Custom TCP
+  - Port: 8000
+  - Source: 0.0.0.0/0 (Anywhere-IPv4)
+
+ 5. NACL Configuration
+ Default NACL Settings
+- Location: VPC → Network ACLs
+- Default rules:
+  - Rule 100: Allow all traffic (0.0.0.0/0)
+  - Rule *: Implicit deny (automatic)
+
+ Custom NACL Configuration
+To block port 8000:
+```
+Rule 90:
+- Action: DENY
+- Port: 8000
+- Source: 0.0.0.0/0
+
+Rule 100:
+- Action: ALLOW
+- Traffic: All
+- Source: 0.0.0.0/0
+```
+
+ NACL Rule Guidelines
+- Rules processed in numerical order (lowest to highest)
+- First matching rule applies
+- DENY rules should have lower numbers than ALLOW rules
+- Implicit deny exists at end of rules
+
+ 6. Testing and Verification
+ Access Testing
+1. Test application access:
    ```
-    SSH into instance
-   ssh -i aws_login.pem ubuntu@[public-ip]
-   
-    Update packages
-   sudo apt update
-   
-    Run Python HTTP server
-   python3 -m http.server 8000
+   http://[public-ip]:8000
    ```
 
-4. Security Configuration Testing:
-   - Initial Security Group settings:
-     - Default allows only port 22 (SSH)
-     - Add inbound rule for port 8000
-       - Type: Custom TCP 
-       - Port range: 8000
-       - Source: 0.0.0.0/0 (Anywhere-IPv4)
-
-5. NACL Configuration:
-    - Navigate to VPC → Network ACLs
-    - Find NACL associated with demo VPC
-    - View default NACL rules (allows all traffic)
-
-    1. Default NACL Rules:
-       - Rule #100: Allow all traffic (0.0.0.0/0)
-       - Rule #*: Implicit deny at end
-
-    2. To Block Port 8000:
-        ```
-        Rule #90: DENY
-        - Port: 8000
-        - Source: 0.0.0.0/0
-
-        Rule #100: ALLOW
-        - All Traffic
-        - Source: 0.0.0.0/0
-        ```
-
-     Key Points:
-     - Rules evaluated in order (lowest to highest number)
-     - First match wins
-     - Put DENY rules before ALLOW rules (lower number)
-     - Implicit deny exists at end
-
-This demonstrates how NACL rule priority affects traffic flow at subnet level.
-
-5. Testing Access:
-   - Try accessing application: http://13.51.156.183:8000
-   - Test different security configurations:
-     - Default security group (blocked)
-     - After adding port 8000 to security group (allowed)
-     - After adding NACL deny rule (blocked)
-     - Test rule priority effects
+ Security Configuration Tests
+1. Default security group (Expected: Blocked)
+2. After adding port 8000 to security group (Expected: Allowed)
+3. After adding NACL deny rule (Expected: Blocked)
+4. Verify rule priority effects
