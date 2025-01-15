@@ -34,9 +34,6 @@ A: ECS provisioning includes AWS CLI (command-line interface), Copilot (workflow
 ### Q: What are the advantages of using ECS?
 A: Key advantages include automatic scalability, high availability, cost-effectiveness, AWS service integration, and built-in security features.
 
-### Q: What is an ECS Cluster?
-A: A cluster is a logical group of EC2 instances running as a single application, serving as the foundation for container deployment.
-
 ### Q: How does ECS capacity management work?
 A: ECS capacity can be managed through Amazon Clusters, Fargate, integration with on-premises servers, and autoscaling based on traffic demands.
 
