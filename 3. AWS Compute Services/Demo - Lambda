@@ -1,1 +1,128 @@
+Demo-1: Create Lambda with API Gateway
 
+Prerequisites:
+- An AWS account (free tier eligible)
+- AWS Management Console access
+
+ 1. Create Lambda Function
+1. Log into AWS Console
+2. Search for "Lambda" in the services search bar
+3. Click "Create function"
+4. Configure the basic settings:
+   - Choose "Author from scratch"
+   - Function name: HelloWorldFunction
+   - Runtime: Python 3.9 (or your preferred runtime)
+   - Architecture: x86_64
+   - Leave other settings as default
+   - Click "Create function"
+
+ 2. Write Function Code
+Replace the default code in the code editor with this Python code:
+```
+def lambda_handler(event, context):
+    return {
+        'statusCode': 200,
+        'body': 'Hello from Lambda! This is my first serverless function.'
+    }
+```
+
+Click "Deploy" to save your changes.
+
+ 3. Create API Gateway Trigger
+1. In your Lambda function page, click "Add trigger"
+2. Select "API Gateway" from the trigger list
+3. Configure API:
+   - Create new API
+   - API type: HTTP API
+   - Security: Open
+4. Click "Add"
+
+ 4. Test Your Function
+
+ Method 1: Test in Console
+1. Click "Test" tab in Lambda console
+2. Create new test event (use default template)
+3. Click "Test" button
+4. You should see the success response
+
+ Method 2: Using API URL
+1. After API Gateway is created, you'll get a URL
+2. Copy the URL from the API Gateway trigger section
+3. Open your browser and paste the URL
+   - Or use curl in terminal: curl your-api-url
+4. You should see the "Hello from Lambda!" message
+
+ Monitoring Your Usage (Free Tier Limits):
+- Go to CloudWatch to see:
+  - Number of invocations
+  - Duration of executions
+  - Error counts
+  - Memory usage
+
+ Free Tier Allowance:
+- 1 million free requests per month
+- 400,000 GB-seconds of compute time per month
+
+ Modify and Experiment:
+Try these modifications to learn more:
+1. Add query parameters handling:
+```
+def lambda_handler(event, context):
+     Get name from query string parameters
+    name = event.get('queryStringParameters', {}).get('name', 'World')
+    
+    return {
+        'statusCode': 200,
+        'body': f'Hello, {name} from Lambda!'
+    }
+```
+
+2. Add JSON response:
+```
+import json
+
+def lambda_handler(event, context):
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        'body': json.dumps({
+            'message': 'Hello from Lambda!',
+            'event': event
+        })
+    }
+```
+
+ Common Issues and Solutions:
+1. If API Gateway URL returns "Internal Server Error":
+   - Check Lambda function response format
+   - Ensure proper IAM roles are set
+
+2. If you get timeout errors:
+   - Check the function timeout setting (default is 3 seconds)
+   - Increase timeout in Configuration tab if needed
+
+3. If you get permission errors:
+   - Check the execution role permissions
+   - Ensure API Gateway has permission to invoke Lambda
+
+ Clean Up (To Avoid Charges):
+When done experimenting:
+1. Delete the API Gateway API
+2. Delete the Lambda function
+3. Check CloudWatch logs and delete if needed
+
+ Tips:
+- Keep the function code simple initially
+- Use CloudWatch logs for debugging
+- Monitor execution time to stay within free tier
+- Test different triggers and integrations
+- Use environment variables for configuration
+
+This demo gives you hands-on experience with:
+- Creating Lambda functions
+- Setting up API triggers
+- Testing and monitoring
+- Basic error handling
+- AWS Free Tier usage
