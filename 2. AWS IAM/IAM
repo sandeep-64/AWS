@@ -80,7 +80,7 @@ A:
 - Makes permission management easier
 - Instead of attaching policies to individual users, attach to groups
 - Reduces administrative overhead
-- Example: Development group, QA group, DB Admin group
+Example: Development group, QA group, DB Admin group
 ```
 +-------------+--------------------------------+-------------+
 | Group Name  | Permissions                    | Users       |
