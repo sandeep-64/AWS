@@ -6,7 +6,7 @@ A: AWS Lambda is a serverless computing service that:
 - Only charges for actual compute time used
 - Handles infrastructure management automatically
 
-![image](https://www.geeksforgeeks.org/introduction-to-aws-lambda/?ref=lbp)
+<img width="757" alt="image" src="https://github.com/user-attachments/assets/cf2aa8a0-ef10-4f9e-a3e3-9ba933334e7d" />
 
 ### Q: What are the key features of AWS Lambda?
 A: Key features include:
