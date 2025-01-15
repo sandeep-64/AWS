@@ -133,7 +133,7 @@ Inbound Rules:
 - Custom TCP (8080): Anywhere (Jenkins)
 ```
 
- 3. Connect to EC2
+ 3. Connect to EC2 [Git Bash]
 ```
 # Linux/Mac
 chmod 600 AWS_login.pem
@@ -143,18 +143,39 @@ ssh -i AWS_login.pem ubuntu@<public-ip>
 Use PuTTY/MobaXterm
 ```
 
- 4. Install Jenkins
+ 4. Install Java First
 ```
-# Update & Install Java
 sudo apt update
-sudo apt install openjdk-11-jdk -y
+sudo apt install fontconfig openjdk-17-jre -y
 
-# Add Jenkins Repo & Install
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+# Verify Java
+java -version
+```
+
+ 5. Install Jenkins (Choose ONE)
+
+ Option A: LTS Version (Recommended)
+```
+# Add Jenkins Key & Repo
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/" | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
+
+ Option B: Weekly Version
+```
+# Add Jenkins Key & Repo
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian binary/" | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
+
+ 6. Install & Start Jenkins
+```
 sudo apt update
 sudo apt install jenkins -y
 
@@ -163,25 +184,18 @@ sudo systemctl start jenkins
 sudo systemctl status jenkins
 ```
 
- 5. Access Jenkins
+ 7. Change Port (If 8080 is in use)
 ```
-# Get initial password
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
-# Access URL
-http://<public-ip>:8080
+sudo systemctl edit jenkins
+# Add:
+[Service]
+Environment="JENKINS_PORT=8081"
 ```
 
- Key Points
-- Keep .pem file secure
-- Stop/terminate instance when not in use
-- Free tier: 750hrs/month
-- Update security patches regularly
-- Monitor costs
-
- Troubleshooting
-- Check instance running
-- Verify security group rules
-- Confirm key permissions
-- Validate public IP
-- Test port 8080 access
+ Key Points:
+- Default port: 8080
+- Service user: jenkins
+- Logs: journalctl -u jenkins.service
+- Config: /lib/systemd/system/jenkins.service
+- Auto-starts on boot
+- Access: http://localhost:8080 (or your-ip:8080)
