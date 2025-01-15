@@ -6,6 +6,10 @@ A: AWS Lambda is a serverless computing service that:
 - Only charges for actual compute time used
 - Handles infrastructure management automatically
 
+### Q: How do AWS Lambda Functions work?
+
+A: AWS Lambda functions work through a simple event-driven process. Developers first upload their code to AWS Lambda and configure triggers (like AWS services, HTTP endpoints, or mobile apps). When these triggers are activated, Lambda automatically provisions the necessary computing resources, executes the code, and then releases the resources. The key benefit is that code only runs when triggered, and users pay only for the actual compute time used. Lambda handles all infrastructure management, scaling, and maintenance automatically, making it a truly serverless solution where developers can focus purely on code rather than server management.
+
 <img width="757" alt="image" src="https://github.com/user-attachments/assets/cf2aa8a0-ef10-4f9e-a3e3-9ba933334e7d" />
 
 ### Q: What are the key features of AWS Lambda?
