@@ -47,7 +47,7 @@ Example:
 |                  |                   | • Read-only for Staging       |
 |                  |                   | • Must use MFA for Admin      |
 +------------------+-------------------+-------------------------------+
-
+```
 Q: What is the difference between Authentication and Authorization in IAM?
 A:
 - Authentication: Verifies who you are (handled by Users)
