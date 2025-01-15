@@ -2,29 +2,36 @@ Q: What is Amazon EC2?
 A: Amazon EC2 (Elastic Cloud Compute) is a web service that provides resizable compute capacity in the cloud. It's a virtual server combining CPU, RAM, and disk resources that can be scaled up or down based on needs.
 
 Q: Why is it called "Elastic" Cloud Compute?
-A: The term "Elastic" refers to the ability to easily scale resources up or down. Users can increase or decrease computing resources, storage, and memory based on their needs, and only pay for what they use.
+A: "Elastic" refers to the ability to scale resources up or down easily. Users can increase or decrease computing resources, storage, and memory based on their needs, and only pay for what they use.
 
-Q: What are the five main types of EC2 instances?
-A: The five main types are:
-1. General Purpose
-2. Compute Optimized
-3. Memory Optimized
-4. Storage Optimized
-5. Accelerated Computing
+Q: What are the five main types of EC2 instances and their use cases?
+A: The five main types of EC2 instances are:
 
-Q: When would you use a Compute Optimized instance?
-A: Compute Optimized instances are best for workloads requiring high processing power, such as:
-- Machine learning applications
-- Gaming servers
-- High-performance computing
-- Batch processing workloads
+1. General Purpose (T and M series)
+   - Balanced CPU, memory, and networking
+   - For: Web servers, dev environments, small databases
+   - Example: t2.micro, m5.large
 
-Q: When would you use a Memory Optimized instance?
-A: Memory Optimized instances are ideal for workloads that process large datasets in memory, such as:
-- Real-time big data analytics
-- High-performance databases
-- In-memory databases
-- Large-scale enterprise applications
+2. Compute Optimized (C series)
+   - High CPU performance
+   - For: Batch processing, gaming servers, ML inference
+   - Example: c5.large
+
+3. Memory Optimized (R and X series)
+   - Large memory capacity
+   - For: Large databases, real-time analytics, SAP HANA
+   - Example: r6g.large
+
+4. Storage Optimized (I, D, H series)
+   - High disk I/O and throughput
+   - For: Data warehousing, NoSQL databases, file systems
+   - Example: i3.large
+
+5. Accelerated Computing (P, G, F series)
+   - GPU/FPGA enabled
+   - For: Machine learning, graphics processing, scientific computing
+   - Example: p3.2xlarge
+
 
 Q: What are AWS Regions and why are they important?
 A: AWS Regions are geographical locations where AWS has data centers. They're important for:
