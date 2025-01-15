@@ -1,4 +1,4 @@
-Q: What is Cloud Computing in simple terms?
+### Q: What is Cloud Computing in simple terms?
 A: Cloud computing is a concept where instead of buying and maintaining physical servers, you can use virtual servers and resources provided by cloud providers, accessed over the internet.
 
 Q: What's the difference between Private Cloud and Public Cloud?
