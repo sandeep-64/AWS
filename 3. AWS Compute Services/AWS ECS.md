@@ -46,9 +46,6 @@ A: ECS integrates with AWS CloudWatch for monitoring, allowing users to create a
 ### Q: How does ECS handle security?
 A: ECS provides security through IAM roles for tasks, VPC isolation, encryption at rest, and integration with AWS security services.
 
-### Q: What are container instances in ECS?
-A: Container instances are individual EC2 instances that are part of an ECS cluster and host the containerized applications.
-
 ### Q: How does ECS integrate with other AWS services?
 A: ECS integrates with services like Amazon ECR (container registry), CloudWatch (monitoring), IAM (security), and other AWS services for comprehensive application management.
 
