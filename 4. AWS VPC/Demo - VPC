@@ -5,16 +5,17 @@ Demo-1: creating and configuring a VPC with security settings in AWS:
    - Select "VPC and more" option for automated resource creation
    - Name the VPC (demo VPC)
    - Keep default CIDR block (10.0.0.0/16 for 65,536 IPs)
-   - Configure availability zones (US-East-1)
-   - Enable public subnets
+   - Customize AZs (eu-north-1a)
+   - Number of public subnets
    - Allow VPC endpoints for S3 Gateway
    - Create VPC (AWS automatically creates subnets, route tables, internet gateway)
 
 2. EC2 Instance Setup:
    - Launch new EC2 instance
-   - Name: demo instance
+   - Name: demo-instance
    - Choose Ubuntu AMI with t2.micro
    - Configure network settings:
+     - Click on Edit Option
      - Select custom VPC (not default)
      - Choose public subnet
      - Enable auto-assign public IP
@@ -37,17 +38,40 @@ Demo-1: creating and configuring a VPC with security settings in AWS:
    - Initial Security Group settings:
      - Default allows only port 22 (SSH)
      - Add inbound rule for port 8000
-     - Source: 0.0.0.0/0 (Anywhere-IPv4)
+       - Type: Custom TCP 
+       - Port range: 8000
+       - Source: 0.0.0.0/0 (Anywhere-IPv4)
 
-   - NACL Configuration:
-     - View default NACL rules (allows all traffic)
-     - Test blocking specific ports:
-       - Add deny rule for port 8000
-       - Test rule priority (rule 100 vs rule 200)
-       - Demonstrate order-based evaluation
+5. NACL Configuration:
+    - Navigate to VPC → Network ACLs
+    - Find NACL associated with demo VPC
+    - View default NACL rules (allows all traffic)
+
+    1. Default NACL Rules:
+       - Rule #100: Allow all traffic (0.0.0.0/0)
+       - Rule #*: Implicit deny at end
+
+    2. To Block Port 8000:
+        ```
+        Rule #90: DENY
+        - Port: 8000
+        - Source: 0.0.0.0/0
+
+        Rule #100: ALLOW
+        - All Traffic
+        - Source: 0.0.0.0/0
+        ```
+
+     Key Points:
+     - Rules evaluated in order (lowest to highest number)
+     - First match wins
+     - Put DENY rules before ALLOW rules (lower number)
+     - Implicit deny exists at end
+
+This demonstrates how NACL rule priority affects traffic flow at subnet level.
 
 5. Testing Access:
-   - Try accessing application: http://[public-ip]:8000
+   - Try accessing application: http://13.51.156.183:8000
    - Test different security configurations:
      - Default security group (blocked)
      - After adding port 8000 to security group (allowed)
