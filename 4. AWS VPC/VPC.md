@@ -92,3 +92,39 @@ A: Route tables determine where network traffic from your subnet or gateway is d
 https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
 
 ![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/89d8316e-7b70-4821-a6bf-67d1dcc4d2fb)
+
+### Q: What are Security Groups and NACLs, and how do they differ in AWS?
+A: Security Groups and NACLs (Network Access Control Lists) are two different layers of network security in AWS:
+
+1. Security Groups:
+- Operate at the instance level (EC2)
+- Can only specify ALLOW rules (no DENY rules)
+- Stateful - return traffic is automatically allowed
+- Default configuration: allows no inbound traffic, allows all outbound traffic
+- Used for controlling traffic at individual resource level
+
+2. NACLs:
+- Operate at the subnet level
+- Can specify both ALLOW and DENY rules
+- Stateless - return traffic must be explicitly allowed
+- Rules are evaluated in order (based on rule number)
+- Acts as a first layer of defense for entire subnet
+- Used for subnet-wide security controls
+
+Key differences:
+- Scope: Security Groups (instance-level) vs NACLs (subnet-level)
+- Rule Types: Security Groups (allow only) vs NACLs (allow and deny)
+- State: Security Groups (stateful) vs NACLs (stateless)
+- Rule Priority: Security Groups (all rules evaluated) vs NACLs (order-based evaluation)
+
+Example:
+If you have an EC2 instance running a web application on port 8000:
+1. First, traffic must pass NACL rules at subnet level
+2. Then, traffic must be allowed by Security Group rules at instance level
+3. Even if Security Group allows port 8000, if NACL denies it, traffic won't reach the instance
+
+Best Practice:
+Use both layers for defense-in-depth:
+- Security Groups for fine-grained control at instance level
+- NACLs for broad subnet-level security policies and blocking known bad actors
+
