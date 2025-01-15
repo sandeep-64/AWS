@@ -1,3 +1,26 @@
+Q: What is Cloud Computing in simple terms?
+A: Cloud computing is a concept where instead of buying and maintaining physical servers, you can use virtual servers and resources provided by cloud providers, accessed over the internet.
+
+Q: What's the difference between Private Cloud and Public Cloud?
+A: 
+- Private Cloud: Infrastructure managed within an organization's boundaries, maintained by the organization itself
+- Public Cloud: Infrastructure provided by companies like AWS, Azure, or GCP, available to anyone with an account
+
+Q: What is virtualization and why is it important?
+A: Virtualization is a technology that allows creating multiple virtual servers on a single physical server. It's important because:
+- Prevents resource wastage
+- Allows better utilization of hardware
+- Enables running multiple applications on one physical server
+- Reduces the need for multiple physical servers
+
+Q: Why is AWS more popular than other cloud providers?
+A: AWS is popular because:
+- First-mover advantage in the cloud market
+- Largest market share
+- Started with basic services and expanded to 200+ services
+- Many companies started their cloud journey with AWS
+- More job opportunities due to widespread adoption
+
 Q: What is AWS and what does it stand for?
 A: AWS stands for Amazon Web Services. It's an expanded cloud computing platform provided by Amazon Company that offers a wide range of services with a pay-as-per-use pricing model, including storage, computing power, databases, and machine learning services.
 
