@@ -1,11 +1,11 @@
 DEmo-1: Launch  ECS cluster using Fargate
 
-### Prerequisites
+ Prerequisites
 - AWS Free Tier Account
 - AWS CLI configured (optional)
 - Docker installed locally (optional)
 
-### Step 1: Create a Cluster using Fargate
+ Step 1: Create a Cluster using Fargate
 1. Open AWS Console
 2. Navigate to ECS (Elastic Container Service)
 3. Click "Create Cluster"
@@ -13,7 +13,7 @@ DEmo-1: Launch  ECS cluster using Fargate
 5. Enter cluster name (e.g., "demo-cluster")
 6. Click "Create"
 
-### Step 2: Create Task Definition
+ Step 2: Create Task Definition
 1. In ECS console, go to "Task Definitions"
 2. Click "Create new Task Definition"
 3. Select "FARGATE"
@@ -33,7 +33,7 @@ DEmo-1: Launch  ECS cluster using Fargate
    ```
 6. Click "Create"
 
-### Step 3: Create Service
+ Step 3: Create Service
 1. Go to your cluster
 2. Click "Create"
 3. Configure service:
@@ -52,37 +52,37 @@ DEmo-1: Launch  ECS cluster using Fargate
    ```
 5. Click "Next step" and "Create Service"
 
-### Step 4: Access Your Application
+ Step 4: Access Your Application
 1. Wait for service to start (status: RUNNING)
 2. Click on Tasks tab
 3. Click on running task
 4. Find "Public IP"
 5. Open browser and enter the Public IP
 
-### Important Notes:
-1. **Cost Management:**
+ Important Notes:
+1. Cost Management:
    - Monitor your usage
    - Delete resources when done:
      - Stop the service
      - Delete the cluster
      - Delete task definitions
 
-2. **Free Tier Limits:**
+2. Free Tier Limits:
    - 750 hours per month of compute time
    - Limited to t2.micro instances
    - Some services might incur charges
 
-3. **Troubleshooting:**
+3. Troubleshooting:
    - Check security group settings
    - Verify task status in Events tab
    - Monitor CloudWatch logs
 
-4. **Best Practices:**
+4. Best Practices:
    - Use minimal resources
    - Clean up unused resources
    - Monitor AWS Billing dashboard
 
-### Common Issues and Solutions:
+ Common Issues and Solutions:
 1. If task fails to start:
    - Check CPU/Memory allocation
    - Verify network configuration
