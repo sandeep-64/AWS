@@ -198,4 +198,4 @@ Environment="JENKINS_PORT=8081"
 - Logs: journalctl -u jenkins.service
 - Config: /lib/systemd/system/jenkins.service
 - Auto-starts on boot
-- Access: http://localhost:8080 (or your-ip:8080)
+- Access: http://localhost:8080 (or ec2_instance_ip:8080)
