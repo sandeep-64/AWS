@@ -1,0 +1,99 @@
+DEmo-1: Launch  ECS cluster using Fargate
+
+### Prerequisites
+- AWS Free Tier Account
+- AWS CLI configured (optional)
+- Docker installed locally (optional)
+
+### Step 1: Create a Cluster using Fargate
+1. Open AWS Console
+2. Navigate to ECS (Elastic Container Service)
+3. Click "Create Cluster"
+4. Select "Networking only (Powered by AWS Fargate)"
+5. Enter cluster name (e.g., "demo-cluster")
+6. Click "Create"
+
+### Step 2: Create Task Definition
+1. In ECS console, go to "Task Definitions"
+2. Click "Create new Task Definition"
+3. Select "FARGATE"
+4. Configure basic settings:
+   ```
+   Task Definition Name: demo-task
+   Task Role: None (for demo)
+   Network Mode: awsvpc (auto-selected)
+   Task memory: 0.5GB (minimum)
+   Task CPU: 0.25 vCPU (minimum)
+   ```
+5. Add container:
+   ```
+   Container name: demo-container
+   Image: nginx:latest (using public nginx image)
+   Port mappings: 80
+   ```
+6. Click "Create"
+
+### Step 3: Create Service
+1. Go to your cluster
+2. Click "Create"
+3. Configure service:
+   ```
+   Launch type: FARGATE
+   Task Definition: demo-task (select the one you created)
+   Service name: demo-service
+   Number of tasks: 1
+   ```
+4. Configure networking:
+   ```
+   VPC: Select default VPC
+   Subnets: Select at least two
+   Security group: Create new
+   - Allow inbound port 80 from anywhere
+   ```
+5. Click "Next step" and "Create Service"
+
+### Step 4: Access Your Application
+1. Wait for service to start (status: RUNNING)
+2. Click on Tasks tab
+3. Click on running task
+4. Find "Public IP"
+5. Open browser and enter the Public IP
+
+### Important Notes:
+1. **Cost Management:**
+   - Monitor your usage
+   - Delete resources when done:
+     - Stop the service
+     - Delete the cluster
+     - Delete task definitions
+
+2. **Free Tier Limits:**
+   - 750 hours per month of compute time
+   - Limited to t2.micro instances
+   - Some services might incur charges
+
+3. **Troubleshooting:**
+   - Check security group settings
+   - Verify task status in Events tab
+   - Monitor CloudWatch logs
+
+4. **Best Practices:**
+   - Use minimal resources
+   - Clean up unused resources
+   - Monitor AWS Billing dashboard
+
+### Common Issues and Solutions:
+1. If task fails to start:
+   - Check CPU/Memory allocation
+   - Verify network configuration
+   - Review security group settings
+
+2. If can't access application:
+   - Verify security group allows port 80
+   - Check if task is in RUNNING state
+   - Confirm public IP is accessible
+
+3. If experiencing high latency:
+   - Check subnet configuration
+   - Verify region settings
+   - Monitor resource utilization
