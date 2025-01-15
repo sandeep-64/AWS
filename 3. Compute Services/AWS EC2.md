@@ -32,6 +32,7 @@ A: The five main types of EC2 instances are:
    - For: Machine learning, graphics processing, scientific computing
    - Example: p3.2xlarge
 
+
 ### Q: What does each part of the EC2 instance name "c5n.xlarge" represent?
 
 A: The EC2 instance name "c5n.xlarge" breaks down into three distinct parts:
@@ -42,6 +43,7 @@ This naming convention helps identify the instance's characteristics at a glance
 3. Attribute (n): Network-optimized capability
 4. Instance Size (xlarge): The relative size/capacity of the instance
 
+![image](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/fc8e083c-dba5-41a6-94b9-14ebef0255c1)
 
 ### Q: What are AWS Regions and why are they important?
 A: AWS Regions are geographical locations where AWS has data centers. They're important for:
