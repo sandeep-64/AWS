@@ -199,3 +199,163 @@ Environment="JENKINS_PORT=8081"
 - Config: /lib/systemd/system/jenkins.service
 - Auto-starts on boot
 - Access: http://localhost:8080 (or ec2_instance_ip:8080)
+
+=========================================================
+
+ Demo-4: Launching EC2 Instance with NGINX Installation
+
+```
+Step 1: Launch EC2 Instance
+1. Basic Details
+   - Name: nginx-web-server
+   - AMI: Amazon Linux 2023
+   - Instance Type: t2.micro
+   - Key pair: demo-keypair (use existing)
+
+2. Network Settings
+   - VPC: Default
+   - Auto-assign Public IP: Enable
+   - Security Group (new):
+     Name: nginx-sg
+     Rules:
+     - SSH (22): Your IP
+     - HTTP (80): Anywhere
+     - HTTPS (443): Anywhere
+
+3. Storage: 8GB gp3
+
+Step 2: Connect & Install NGINX
+1. Connect to EC2:
+   ssh -i "demo-keypair.pem" ec2-user@<public-ip>
+
+2. Update System:
+   sudo dnf update -y
+
+3. Install NGINX:
+   sudo dnf install nginx -y
+
+4. Start & Enable NGINX:
+   sudo systemctl start nginx
+   sudo systemctl enable nginx
+   sudo systemctl status nginx
+
+5. Create Custom Web Page:
+   sudo tee /usr/share/nginx/html/index.html << EOF
+   <!DOCTYPE html>
+   <html>
+   <head><title>Welcome to My Web Server</title></head>
+   <body>
+       <h1>Hello from EC2!</h1>
+       <p>This is my custom NGINX page.</p>
+   </body>
+   </html>
+   EOF
+
+6. Test:
+   - Open browser: http://<public-ip>
+   - From EC2: curl localhost
+```
+
+ Demo-5: EC2 Instance with Custom User Data Script (Apache + PHP)
+
+```
+Step 1: Prepare User Data Script
+1. Create this script before launching EC2:
+#!/bin/bash
+# Update system
+dnf update -y
+
+# Install Apache & PHP
+dnf install -y httpd php php-mysqlnd
+
+# Start & Enable Apache
+systemctl start httpd
+systemctl enable httpd
+
+# Create PHP info page
+echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+
+# Create custom index page
+cat > /var/www/html/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EC2 Web Server</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to my EC2 Web Server</h1>
+    <p>This page was created by user data script</p>
+    <p><a href="/info.php">PHP Info</a></p>
+</body>
+</html>
+EOF
+
+# Set permissions
+chown -R apache:apache /var/www/html
+
+Step 2: Launch EC2 Instance
+1. Basic Configuration
+   - Name: apache-php-server
+   - AMI: Amazon Linux 2023
+   - Instance Type: t2.micro
+   - Key pair: demo-keypair
+
+2. Network Settings
+   - VPC: Default
+   - Auto-assign Public IP: Enable
+   - Security Group (new):
+     Name: apache-sg
+     Rules:
+     - SSH (22): Your IP
+     - HTTP (80): Anywhere
+     - HTTPS (443): Anywhere
+
+3. Advanced Details
+   - User data: Paste the script from Step 1
+   - IAM role: None
+   - Termination protection: Disable
+
+4. Storage: 8GB gp3
+
+Step 3: Verify Installation
+1. Wait 3-5 minutes for user data script to complete
+2. Test web server:
+   - Browser: http://<public-ip>
+   - PHP info: http://<public-ip>/info.php
+
+Step 4: Monitor & Troubleshoot
+1. Check Apache status:
+   ssh -i "demo-keypair.pem" ec2-user@<public-ip>
+   sudo systemctl status httpd
+
+2. View logs if needed:
+   sudo tail -f /var/log/httpd/error_log
+   sudo tail -f /var/log/httpd/access_log
+
+3. Check user data script log:
+   sudo cat /var/log/cloud-init-output.log
+```
+
+Key Points for Both Demos:
+1. Security Best Practices:
+   - Always update system packages first
+   - Limit SSH access to your IP
+   - Use specific security group rules
+
+2. Monitoring:
+   - Check service status regularly
+   - Monitor logs for errors
+   - Set up CloudWatch if needed
+
+3. Maintenance:
+   - Regular updates
+   - Backup configurations
+   - Document all changes
+
+4. Cost Management:
+   - Use t2.micro for free tier
+   - Stop instance when not in use
+   - Monitor usage patterns
