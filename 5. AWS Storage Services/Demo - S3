@@ -1,42 +1,521 @@
-Demo: Creating and Using an S3 Bucket
+### Demo 1: Basic Bucket Operations
+Detailed Steps:
+1. Create Bucket
+   ```
+   a. Open AWS Console → S3
+   b. Click "Create bucket"
+   c. Enter bucket name: "demo-basics-[yourname]-[yyyymmdd]"
+   d. Select region (choose closest to you)
+   e. Keep "Block all public access" enabled
+   f. Keep default settings
+   g. Click "Create bucket"
+   ```
 
-Step 1: Create a Bucket
-1. Log into AWS Console and go to S3
-2. Click "Create bucket"
-3. For the demo, use these settings:
-   - Bucket name: `demo-bucket-[yourname]-[date]` (must be unique globally)
-   - Region: Choose your closest region
-   - Keep default settings (Block all public access)
-   - Click "Create bucket"
+2. Upload Files
+   ```
+   a. Click on your new bucket
+   b. Click "Upload"
+   c. Click "Add files"
+   d. Select 2-3 different files (text, image, pdf)
+   e. Keep default settings
+   f. Click "Upload"
+   ```
 
-Step 2: Upload a File
-1. Click on your new bucket
-2. Click "Upload"
-3. Click "Add files" and select a small test file (like a text file)
-4. Click "Upload"
+3. Create Folder Structure
+   ```
+   a. Click "Create folder"
+   b. Create these folders:
+      - documents
+      - images
+      - backups
+   c. Enter folder → Upload specific files to each
+   ```
 
-Step 3: Manage the File
-1. After upload, click on your file to see its properties
-2. Try these basic operations:
-   - Download: Select file → Click "Download"
-   - Get URL: Click file → Copy S3 URI
-   - Make public (optional):
-     - Select file → "Actions" → "Make public"
-     - Note: First disable "Block public access" in bucket settings
+4. File Operations
+   ```
+   a. Select a file → Click "Download"
+   b. Select a file → Click "Copy URL"
+   c. Select a file → Click "Properties" to view details
+   d. Select a file → Click "Move" to transfer between folders
+   ```
 
-Step 4: Create a Folder
-1. Click "Create folder"
-2. Name it "documents"
-3. Upload some files into this folder
+5. Clean Up
+   ```
+   a. Select all files → Delete
+   b. Empty the folders
+   c. Delete the folders
+   d. Optional: Delete bucket
+   ```
 
-Step 5: Enable Versioning (Optional)
-1. Go to bucket → Properties
-2. Find "Bucket Versioning"
-3. Click "Edit" and Enable
-4. Upload same file again to see versioning in action
+### Demo 2: File Management & Organization
+Detailed Steps:
+1. Create New Bucket
+   ```
+   a. Name: "demo-files-[yourname]-[yyyymmdd]"
+   b. Same region as before
+   c. Default settings
+   ```
 
-Free Tier Limits to Remember:
-- 5GB Standard Storage
-- 20,000 GET Requests
-- 2,000 PUT Requests
-- Data transfer: 100GB out to internet
+2. Organize with Folders
+   ```
+   a. Create folder structure:
+      /documents/important
+      /documents/archive
+      /images/high-res
+      /images/thumbnails
+   ```
+
+3. Upload with Metadata
+   ```
+   a. Click "Upload" → Add files
+   b. Before uploading, click on a file
+   c. Click "Additional upload options"
+   d. Add metadata:
+      - Key: "project"
+      - Value: "demo"
+   e. Add tags:
+      - Key: "department"
+      - Value: "training"
+   ```
+
+4. Bulk Operations
+   ```
+   a. Upload multiple files at once
+   b. Select multiple files
+   c. Use "Actions" dropdown
+   d. Try: Download, Move, Copy
+   ```
+
+5. Search and Filter
+   ```
+   a. Use search bar with:
+      - Filename
+      - Extension
+      - Tags
+   b. Use filters in left sidebar
+   ```
+
+### Demo 3: Versioning System
+Detailed Steps:
+1. Create Versioning Bucket
+   ```
+   a. Name: "demo-versions-[yourname]-[yyyymmdd]"
+   b. Same region
+   c. Go to Properties
+   d. Find "Bucket Versioning"
+   e. Click "Edit" → Enable
+   ```
+
+2. Upload Initial Files
+   ```
+   a. Create test.txt with content "Version 1"
+   b. Upload to bucket
+   c. Note the version ID in Properties
+   ```
+
+3. Create Versions
+   ```
+   a. Edit test.txt locally to say "Version 2"
+   b. Upload same file (same name)
+   c. Repeat with "Version 3"
+   d. Click "Show versions" in bucket
+   ```
+
+4. Version Management
+   ```
+   a. List versions
+   b. Download specific versions
+   c. Restore previous version:
+      - Show versions
+      - Select older version
+      - Click "Download"
+   ```
+
+5. Delete with Versioning
+   ```
+   a. Delete latest version
+   b. Observe version history
+   c. Restore deleted version
+   d. Try permanent deletion
+   ```
+
+### Demo 4: Access Control
+Detailed Steps:
+1. Initial Setup
+   ```
+   a. Create bucket: "demo-access-[yourname]-[yyyymmdd]"
+   b. Upload test file
+   c. Go to "Permissions" tab
+   ```
+
+2. Bucket Policy
+   ```
+   a. Click "Bucket policy"
+   b. Add basic read policy:
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "PublicRead",
+               "Effect": "Allow",
+               "Principal": "*",
+               "Action": ["s3:GetObject"],
+               "Resource": ["arn:aws:s3:::your-bucket-name/*"]
+           }
+       ]
+   }
+   ```
+
+3. Create IAM User
+   ```
+   a. Go to IAM Console
+   b. Create new user: "s3-demo-user"
+   c. Attach policy:
+      - AmazonS3ReadOnlyAccess
+   d. Save credentials
+   ```
+
+4. Presigned URLs
+   ```
+   a. Select a file
+   b. Click "Share with presigned URL"
+   c. Set expiration (e.g., 1 hour)
+   d. Copy and test URL
+   ```
+
+5. Test Access Levels
+   ```
+   a. Try accessing as:
+      - Anonymous user
+      - IAM user
+      - Presigned URL
+   b. Document what works/doesn't
+   ```
+
+### Demo 5: Static Website Hosting
+Detailed Steps:
+1. Create Website Bucket
+   ```
+   a. Name: "demo-website-[yourname]-[yyyymmdd]"
+   b. Uncheck "Block all public access"
+   c. Acknowledge warning
+   ```
+
+2. Upload Website Files
+   ```
+   a. Create index.html:
+   <!DOCTYPE html>
+   <html>
+   <head><title>My S3 Website</title></head>
+   <body>
+       <h1>Hello from S3!</h1>
+       <p>This is a test page.</p>
+   </body>
+   </html>
+
+   b. Create error.html similarly
+   c. Upload both files
+   ```
+
+3. Configure Static Website
+   ```
+   a. Go to bucket Properties
+   b. Find "Static website hosting"
+   c. Click "Edit"
+   d. Enable static website hosting
+   e. Set index.html as index document
+   f. Set error.html as error document
+   g. Save changes
+   ```
+
+4. Set Bucket Policy
+   ```
+   a. Go to Permissions
+   b. Add policy:
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "PublicReadGetObject",
+               "Effect": "Allow",
+               "Principal": "*",
+               "Action": "s3:GetObject",
+               "Resource": "arn:aws:s3:::your-bucket-name/*"
+           }
+       ]
+   }
+   ```
+
+5. Test Website
+   ```
+   a. Go to Properties
+   b. Find static website hosting endpoint
+   c. Test in browser:
+      - Main page
+      - Non-existent page (error)
+   ```
+
+I'll continue with the detailed steps for the next 5 demos:
+
+### Demo 6: Storage Classes
+Detailed Steps:
+1. Create Test Bucket
+   ```
+   a. Name: "demo-storage-[yourname]-[yyyymmdd]"
+   b. Region: your closest region
+   c. Default settings
+   ```
+
+2. Upload Files in Different Storage Classes
+   ```
+   a. Click "Upload" → Add files
+   b. Select a file → "Additional upload options"
+   c. Under "Storage class" choose:
+      - File1.txt: Standard
+      - File2.txt: Standard-IA
+      - File3.txt: One Zone-IA
+      - File4.txt: Intelligent-Tiering
+   d. Add description in tags to identify each
+   ```
+
+3. Compare Properties
+   ```
+   a. Select each file
+   b. Click "Properties"
+   c. Note differences in:
+      - Storage class
+      - Pricing tier
+      - Retrieval times
+      - Availability
+   ```
+
+4. Test Access Patterns
+   ```
+   a. Download each file
+   b. Note any delays
+   c. Check "Last accessed" timestamp
+   d. Monitor "Storage Lens" for insights
+   ```
+
+5. Set Up Storage Class Transition
+   ```
+   a. Go to "Management" tab
+   b. Create lifecycle rule:
+      - Name: "storage-transition-demo"
+      - Choose bucket scope
+      - Add transition:
+        * After 30 days → Standard-IA
+        * After 60 days → One Zone-IA
+   ```
+
+### Demo 7: Lifecycle Management
+Detailed Steps:
+1. Initial Setup
+   ```
+   a. Create bucket: "demo-lifecycle-[yourname]-[yyyymmdd]"
+   b. Create folders:
+      - /active
+      - /archive
+      - /temporary
+   ```
+
+2. Create Basic Files
+   ```
+   a. Upload to /active:
+      - daily-report.txt
+      - weekly-report.txt
+   b. Upload to /temporary:
+      - temp-file1.txt
+      - temp-file2.txt
+   ```
+
+3. Configure Lifecycle Rules
+   ```
+   a. Go to Management → Lifecycle rules
+   b. Create Rule 1 (Archive):
+      - Name: "Archive-Rule"
+      - Scope: /active folder
+      - Transition:
+        * Standard to Standard-IA: 30 days
+        * Standard-IA to Glacier: 60 days
+   
+   c. Create Rule 2 (Delete):
+      - Name: "Cleanup-Rule"
+      - Scope: /temporary folder
+      - Expiration: 7 days
+   ```
+
+4. Add Versioning Management
+   ```
+   a. Enable versioning
+   b. Create Rule 3:
+      - Name: "Version-Cleanup"
+      - Scope: Entire bucket
+      - Actions:
+        * Delete previous versions: 30 days
+        * Delete expired delete markers
+   ```
+
+5. Monitor and Test
+   ```
+   a. Upload test files with dates in names
+   b. Check "Lifecycle" tab regularly
+   c. Monitor transitions in Properties
+   d. Set reminders to verify transitions
+   ```
+
+### Demo 8: Event Notifications
+Detailed Steps:
+1. Create SNS Topic
+   ```
+   a. Go to SNS Console
+   b. Create topic:
+      - Name: "s3-event-demo"
+      - Type: Standard
+   c. Create subscription:
+      - Protocol: Email
+      - Endpoint: your email
+   d. Confirm subscription
+   ```
+
+2. Configure S3 Bucket
+   ```
+   a. Create bucket: "demo-events-[yourname]-[yyyymmdd]"
+   b. Go to Properties
+   c. Event notifications
+   d. Create event notification:
+      - Name: "upload-notification"
+      - Events: All object create events
+      - Destination: SNS topic
+      - Select topic created earlier
+   ```
+
+3. Set Up Additional Events
+   ```
+   a. Create second notification:
+      - Name: "delete-notification"
+      - Events: All delete events
+      - Same SNS topic
+   
+   b. Create third notification:
+      - Name: "large-file-notification"
+      - Events: Put
+      - Filter: .zip, .iso
+   ```
+
+4. Test Different Scenarios
+   ```
+   a. Upload small text file
+   b. Upload large ZIP file
+   c. Delete a file
+   d. Check email notifications
+   ```
+
+5. Monitor and Analyze
+   ```
+   a. View CloudWatch metrics
+   b. Check SNS delivery stats
+   c. Verify notification patterns
+   ```
+
+### Demo 9: Cross-Region Replication
+Detailed Steps:
+1. Create Source and Destination Buckets
+   ```
+   a. Source bucket:
+      - Name: "demo-source-[yourname]-[yyyymmdd]"
+      - Region: primary region
+      - Enable versioning
+   
+   b. Destination bucket:
+      - Name: "demo-destination-[yourname]-[yyyymmdd]"
+      - Different region
+      - Enable versioning
+   ```
+
+2. Configure IAM Role
+   ```
+   a. Go to IAM Console
+   b. Create new role:
+      - Use case: S3
+      - Permissions: AWSReplicationPolicy
+   c. Name: "s3-replication-role-demo"
+   ```
+
+3. Set Up Replication
+   ```
+   a. Source bucket → Management
+   b. Create replication rule:
+      - Name: "demo-replication"
+      - Status: Enabled
+      - Source: All objects
+      - Destination: Select destination bucket
+      - IAM role: Use created role
+   ```
+
+4. Test Replication
+   ```
+   a. Upload new files
+   b. Monitor replication status
+   c. Check both buckets
+   d. Verify metadata copying
+   ```
+
+5. Advanced Testing
+   ```
+   a. Test with large files
+   b. Delete objects
+   c. Check versioning
+   d. Monitor CloudWatch metrics
+   ```
+
+### Demo 10: Analytics and Monitoring
+Detailed Steps:
+1. Enable Storage Lens
+   ```
+   a. Go to S3 Console
+   b. Click Storage Lens
+   c. Create dashboard:
+      - Name: "demo-analytics"
+      - Metrics: Enable free metrics
+      - Advanced metrics: Optional
+   ```
+
+2. Set Up CloudWatch Monitoring
+   ```
+   a. Create CloudWatch dashboard
+   b. Add S3 metrics:
+      - RequestCount
+      - BytesDownloaded
+      - BytesUploaded
+      - 4xxErrors
+      - 5xxErrors
+   ```
+
+3. Configure Metrics
+   ```
+   a. Enable request metrics:
+      - Go to bucket Metrics
+      - Create filter
+      - Select metrics to track
+   b. Set up alerts:
+      - Error rate threshold
+      - Storage growth
+   ```
+
+4. Create Reports
+   ```
+   a. Enable Storage Class Analysis
+   b. Configure Inventory:
+      - Daily reports
+      - All objects
+      - All metadata
+   ```
+
+5. Monitor and Analyze
+   ```
+   a. Review dashboards daily
+   b. Check Storage Lens insights
+   c. Download inventory reports
+   d. Track costs and usage
+   ```
