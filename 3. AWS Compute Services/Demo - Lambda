@@ -68,7 +68,7 @@ Try these modifications to learn more:
 1. Add query parameters handling:
 ```
 def lambda_handler(event, context):
-    # Get name from query string parameters
+     Get name from query string parameters
     name = event.get('queryStringParameters', {}).get('name', 'World')
     
     return {
@@ -94,28 +94,276 @@ def lambda_handler(event, context):
     }
 ```
 
- Common Issues and Solutions:
-1. If API Gateway URL returns "Internal Server Error":
-   - Check Lambda function response format
-   - Ensure proper IAM roles are set
+====================================================================
 
-2. If you get timeout errors:
-   - Check the function timeout setting (default is 3 seconds)
-   - Increase timeout in Configuration tab if needed
+ Demo-2: Lambda with S3 Trigger (Image Thumbnail Generator)
 
-3. If you get permission errors:
-   - Check the execution role permissions
-   - Ensure API Gateway has permission to invoke Lambda
+```
+Step 1: Create S3 Buckets
+1. Create two buckets:
+   - source-images-xxx (for original images)
+   - resized-images-xxx (for thumbnails)
 
- Clean Up (To Avoid Charges):
-When done experimenting:
-1. Delete the API Gateway API
-2. Delete the Lambda function
-3. Check CloudWatch logs and delete if needed
+Step 2: Create Lambda Function
+1. Name: image-resizer
+2. Runtime: Python 3.9
+3. Add permissions to Lambda role:
+   - S3 read/write access
+   - CloudWatch Logs
 
- Tips:
-- Keep the function code simple initially
-- Use CloudWatch logs for debugging
-- Monitor execution time to stay within free tier
-- Test different triggers and integrations
-- Use environment variables for configuration
+4. Function Code:
+import boto3
+import os
+from PIL import Image
+import io
+
+s3_client = boto3.client('s3')
+
+def lambda_handler(event, context):
+     Get source bucket and file info
+    source_bucket = event['Records'][0]['s3']['bucket']['name']
+    file_name = event['Records'][0]['s3']['object']['key']
+    target_bucket = os.environ['TARGET_BUCKET']
+    
+     Download image
+    file_obj = s3_client.get_object(
+        Bucket=source_bucket,
+        Key=file_name
+    )
+    file_content = file_obj["Body"].read()
+    
+     Resize image
+    with Image.open(io.BytesIO(file_content)) as image:
+        resized_image = image.copy()
+        resized_image.thumbnail((128, 128))
+        buffer = io.BytesIO()
+        resized_image.save(buffer, format=image.format)
+        buffer.seek(0)
+    
+     Upload thumbnail
+    s3_client.put_object(
+        Bucket=target_bucket,
+        Key=f"thumb_{file_name}",
+        Body=buffer
+    )
+    
+    return {
+        'statusCode': 200,
+        'body': f'Created thumbnail for {file_name}'
+    }
+
+5. Environment Variables:
+   TARGET_BUCKET: resized-images-xxx
+
+Step 3: Add S3 Trigger
+1. Add trigger from source bucket
+2. Event type: All object create events
+
+Step 4: Test
+1. Upload image to source bucket
+2. Check resized bucket for thumbnail
+```
+
+====================================================================
+
+ Demo-3: Lambda with CloudWatch Events (Scheduled Task)
+
+```
+Step 1: Create Lambda Function
+1. Name: ec2-start-stop
+2. Runtime: Python 3.9
+3. IAM Role: Add EC2 permissions
+
+4. Function Code:
+import boto3
+
+def lambda_handler(event, context):
+    ec2 = boto3.client('ec2')
+    
+     Get all running instances
+    response = ec2.describe_instances(
+        Filters=[
+            {
+                'Name': 'instance-state-name',
+                'Values': ['running']
+            }
+        ]
+    )
+    
+    instance_ids = []
+    for reservation in response['Reservations']:
+        for instance in reservation['Instances']:
+            instance_ids.append(instance['InstanceId'])
+    
+    if instance_ids:
+         Stop the instances
+        ec2.stop_instances(InstanceIds=instance_ids)
+        print(f"Stopped instances: {instance_ids}")
+    
+    return {
+        'statusCode': 200,
+        'body': f'Processed {len(instance_ids)} instances'
+    }
+
+Step 2: Create EventBridge Rule
+1. Go to Amazon EventBridge
+2. Create rule:
+   - Name: daily-instance-stop
+   - Schedule: cron(0 18 ? * MON-FRI *)
+   - Target: Lambda function
+   - Function: ec2-start-stop
+
+Step 3: Test
+1. Create test event in Lambda
+2. Monitor in CloudWatch Logs
+```
+
+====================================================================
+
+ Demo-4: Lambda with DynamoDB Integration
+
+```
+Step 1: Create DynamoDB Table
+1. Table name: UserVisits
+2. Partition key: userId (String)
+3. Sort key: visitTime (String)
+
+Step 2: Create Lambda Function
+1. Name: user-visit-tracker
+2. Runtime: Python 3.9
+3. Add DynamoDB permissions to role
+
+4. Function Code:
+import boto3
+import json
+import datetime
+import uuid
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('UserVisits')
+
+def lambda_handler(event, context):
+     Get user info from event
+    body = json.loads(event['body'])
+    user_id = body.get('userId', str(uuid.uuid4()))
+    
+     Create visit record
+    visit_time = datetime.datetime.now().isoformat()
+    
+     Store in DynamoDB
+    table.put_item(
+        Item={
+            'userId': user_id,
+            'visitTime': visit_time,
+            'userAgent': event.get('headers', {}).get('User-Agent', 'Unknown'),
+            'path': event.get('path', '/')
+        }
+    )
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps({
+            'message': 'Visit recorded',
+            'userId': user_id,
+            'visitTime': visit_time
+        })
+    }
+
+Step 3: Create API Gateway
+1. Create HTTP API
+2. Add route: POST /visit
+3. Integrate with Lambda
+
+Step 4: Test
+1. Use curl or Postman:
+   curl -X POST https://your-api.execute-api.region.amazonaws.com/visit \
+   -H "Content-Type: application/json" \
+   -d '{"userId": "user123"}'
+```
+
+====================================================================
+
+ Demo-5: Lambda with SQS Queue Processing
+
+```
+Step 1: Create SQS Queue
+1. Go to SQS console
+2. Create queue:
+   - Name: message-queue
+   - Type: Standard Queue
+
+Step 2: Create Lambda Function
+1. Name: queue-processor
+2. Runtime: Python 3.9
+3. Add SQS permissions
+
+4. Function Code:
+import json
+import boto3
+
+def lambda_handler(event, context):
+    processed_messages = []
+    
+    for record in event['Records']:
+         Get message body
+        message = json.loads(record['body'])
+        
+         Process message (example: uppercase conversion)
+        result = message.get('text', '').upper()
+        
+        processed_messages.append({
+            'original': message.get('text'),
+            'processed': result,
+            'messageId': record['messageId']
+        })
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps({
+            'processedMessages': processed_messages
+        })
+    }
+
+Step 3: Add SQS Trigger
+1. Add trigger to Lambda
+2. Select your SQS queue
+3. Batch size: 10 (default)
+
+Step 4: Test
+1. Send message to SQS:
+   ```
+   import boto3
+   
+   sqs = boto3.client('sqs')
+   queue_url = 'YOUR_QUEUE_URL'
+   
+   response = sqs.send_message(
+       QueueUrl=queue_url,
+       MessageBody='{"text": "hello world"}'
+   )
+   ```
+
+Important Notes for All Demos:
+1. Free Tier Limits:
+   - 1M free requests per month
+   - 400,000 GB-seconds compute time
+   - Monitor usage in CloudWatch
+
+2. Best Practices:
+   - Use environment variables
+   - Implement error handling
+   - Set appropriate timeouts
+   - Use CloudWatch logs
+
+3. Clean Up:
+   - Delete Lambda functions
+   - Remove API Gateway APIs
+   - Delete S3 buckets
+   - Remove DynamoDB tables
+   - Delete SQS queues
+
+4. Security:
+   - Use minimum required permissions
+   - Encrypt sensitive data
+   - Implement proper error handling
+   - Monitor function execution
