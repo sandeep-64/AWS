@@ -1,0 +1,42 @@
+Demo: Creating and Using an S3 Bucket
+
+Step 1: Create a Bucket
+1. Log into AWS Console and go to S3
+2. Click "Create bucket"
+3. For the demo, use these settings:
+   - Bucket name: `demo-bucket-[yourname]-[date]` (must be unique globally)
+   - Region: Choose your closest region
+   - Keep default settings (Block all public access)
+   - Click "Create bucket"
+
+Step 2: Upload a File
+1. Click on your new bucket
+2. Click "Upload"
+3. Click "Add files" and select a small test file (like a text file)
+4. Click "Upload"
+
+Step 3: Manage the File
+1. After upload, click on your file to see its properties
+2. Try these basic operations:
+   - Download: Select file → Click "Download"
+   - Get URL: Click file → Copy S3 URI
+   - Make public (optional):
+     - Select file → "Actions" → "Make public"
+     - Note: First disable "Block public access" in bucket settings
+
+Step 4: Create a Folder
+1. Click "Create folder"
+2. Name it "documents"
+3. Upload some files into this folder
+
+Step 5: Enable Versioning (Optional)
+1. Go to bucket → Properties
+2. Find "Bucket Versioning"
+3. Click "Edit" and Enable
+4. Upload same file again to see versioning in action
+
+Free Tier Limits to Remember:
+- 5GB Standard Storage
+- 20,000 GET Requests
+- 2,000 PUT Requests
+- Data transfer: 100GB out to internet
