@@ -262,3 +262,203 @@ b. Select user → Delete
 - Username
 - Initial password
 - MFA setup instructions
+
+==============================================================================
+
+ Demo 6: IAM User with Multiple MFA Devices
+
+```
+Part 1: Create User with Initial MFA
+1. IAM → Users → Create user
+   - Username: MultiMFAUser
+   - Console access: ✅
+   - Password: Welcome@123
+   - Custom password: ✅
+   - Password reset: ❌
+
+2. Add First MFA Device
+   - Select user → Security credentials
+   - Assign MFA device
+   - Device name: Primary-MFA
+   - Select Virtual MFA
+   - Use Google Authenticator
+   - Enter two consecutive codes
+   - Finish setup
+
+Part 2: Add Secondary MFA
+1. Same user → Security credentials
+2. Add another MFA
+   - Device name: Backup-MFA
+   - Choose different authenticator app (e.g., Authy)
+   - Complete setup similarly
+
+Part 3: Test MFA Failover
+1. Sign out completely
+2. Try logging in with:
+   - Primary MFA
+   - Secondary MFA
+3. Verify both work
+```
+
+==============================================================================
+
+ Demo 7: IAM Emergency Access Management
+
+```
+Part 1: Create Emergency Access User
+1. IAM → Users → Create user
+   - Username: EmergencyAdmin
+   - Console access: ✅
+   - Password: Complex password
+   - Save credentials securely
+
+2. Create Emergency Access Policy
+   - IAM → Policies → Create policy
+   - JSON:
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": "*",
+         "Resource": "*",
+         "Condition": {
+           "Bool": {
+             "aws:MultiFactorAuthPresent": "true"
+           }
+         }
+       }
+     ]
+   }
+   - Name: EmergencyAccessPolicy
+
+3. Attach Policy
+   - Select EmergencyAdmin user
+   - Attach EmergencyAccessPolicy
+   - Enable MFA enforcement
+
+Part 2: Setup Break-Glass Procedure
+1. Create Documentation
+   - Store credentials securely
+   - Document access procedure
+   - Include MFA backup codes
+
+2. Test Emergency Access
+   - Store credentials in secure location
+   - Regular testing schedule
+   - Document access attempts
+```
+
+==============================================================================
+
+ Demo 8: IAM with Service Control Policies (SCP)
+
+```
+Part 1: Create Organization Structure
+1. AWS Organizations
+   - Enable Organizations
+   - Create Organizational Unit (OU)
+   - Name: DevelopmentOU
+
+2. Create Service Control Policy
+   - Organizations → Policies
+   - Create policy
+   - Name: DevelopmentSCP
+   - Policy:
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Deny",
+         "Action": [
+           "s3:DeleteBucket",
+           "ec2:TerminateInstances"
+         ],
+         "Resource": "*"
+       }
+     ]
+   }
+
+Part 2: Apply SCP
+1. Select DevelopmentOU
+2. Attach DevelopmentSCP
+3. Move accounts to OU
+4. Test restrictions
+```
+
+==============================================================================
+
+ Demo 9: IAM with Resource Tags
+
+```
+Part 1: Create Tagged Resources
+1. Create S3 Bucket
+   - Name: tagged-bucket-demo
+   - Tags:
+     - Environment: Development
+     - Project: Demo
+
+2. Create Tag-Based Policy
+   - IAM → Policies
+   - Create policy:
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Action": "s3:*",
+         "Resource": "*",
+         "Condition": {
+           "StringEquals": {
+             "aws:ResourceTag/Environment": "Development"
+           }
+         }
+       }
+     ]
+   }
+   - Name: TagBasedAccess
+
+Part 2: Implement Tag-Based Access
+1. Create Group: TagAccessGroup
+2. Attach TagBasedAccess policy
+3. Create test user
+4. Add to TagAccessGroup
+5. Test access to:
+   - Tagged resources
+   - Untagged resources
+```
+
+==============================================================================
+
+ Demo 10: IAM Access Analyzer Setup
+
+```
+Part 1: Enable Access Analyzer
+1. IAM → Access Analyzer
+2. Create analyzer
+   - Name: MainAccountAnalyzer
+   - Zone of trust: Current account
+
+Part 2: Configure Findings
+1. Set up notifications
+   - Create SNS topic
+   - Configure email alerts
+
+2. Review Findings
+   - Check external access
+   - Document findings
+   - Create remediation plan
+
+Part 3: Regular Maintenance
+1. Schedule weekly reviews
+2. Document changes
+3. Update policies based on findings
+```
+
+Best Practices for All Demos:
+1. Always follow least privilege principle
+2. Document all changes
+3. Regular access reviews
+4. Maintain backup access methods
+5. Test all configurations
+6. Clean up resources after testing
