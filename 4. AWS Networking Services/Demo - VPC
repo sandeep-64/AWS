@@ -98,3 +98,250 @@ Rule 100:
 2. After adding port 8000 to security group (Expected: Allowed)
 3. After adding NACL deny rule (Expected: Blocked)
 4. Verify rule priority effects
+
+=================================================================
+
+### Demo-2: VPC Peering and Multi-AZ Setup
+
+```bash
+Step 1: Create Two VPCs
+1. First VPC (Production):
+   ```
+   Name: prod-vpc
+   CIDR: 10.0.0.0/16
+   Region: eu-north-1
+   Subnets:
+     - Public (10.0.1.0/24) in AZ1
+     - Private (10.0.2.0/24) in AZ1
+   ```
+
+2. Second VPC (Development):
+   ```
+   Name: dev-vpc
+   CIDR: 172.16.0.0/16
+   Region: eu-north-1
+   Subnets:
+     - Public (172.16.1.0/24) in AZ2
+     - Private (172.16.2.0/24) in AZ2
+   ```
+
+Step 2: Set Up VPC Peering
+1. Create peering connection:
+   ```
+   Name: prod-dev-peer
+   Requester: prod-vpc
+   Accepter: dev-vpc
+   ```
+
+2. Accept peering request
+3. Update route tables:
+   ```
+   Prod VPC routes:
+     - Add 172.16.0.0/16 → Peering Connection
+   Dev VPC routes:
+     - Add 10.0.0.0/16 → Peering Connection
+   ```
+
+Step 3: Test Connection
+1. Launch EC2 instances in each VPC
+2. Test connectivity using ping or SSH
+```
+=================================================================
+
+### Demo-3: VPC with Site-to-Site VPN
+
+```bash
+Step 1: Create VPC
+1. VPC Configuration:
+   ```
+   Name: vpn-vpc
+   CIDR: 192.168.0.0/16
+   Subnets:
+     - Public: 192.168.1.0/24
+     - Private: 192.168.2.0/24
+   ```
+
+Step 2: Create Virtual Private Gateway
+1. VPG Setup:
+   ```
+   Name: demo-vpg
+   ASN: 65000
+   ```
+2. Attach to VPC
+
+Step 3: Create Customer Gateway
+1. CGW Configuration:
+   ```
+   Name: demo-cgw
+   Routing: Static
+   IP Address: [Your on-premises router IP]
+   ```
+
+Step 4: Create VPN Connection
+1. VPN Setup:
+   ```
+   Name: demo-vpn
+   Target Gateway: demo-vpg
+   Customer Gateway: demo-cgw
+   Routing Options: Static
+   Static IP Prefixes: [Your local network CIDR]
+   ```
+
+Step 5: Configure Route Tables
+1. Add routes:
+   ```
+   Route table entry:
+   Destination: [On-premises CIDR]
+   Target: Virtual Private Gateway
+   ```
+```
+
+=================================================================
+
+### Demo-4: VPC with Private Link and Endpoints
+
+```bash
+Step 1: Create Base VPC
+1. VPC Settings:
+   ```
+   Name: endpoint-vpc
+   CIDR: 10.0.0.0/16
+   Subnets:
+     - Private: 10.0.1.0/24
+     - Private: 10.0.2.0/24
+   ```
+
+Step 2: Create Endpoints
+1. S3 Gateway Endpoint:
+   ```
+   Service: com.amazonaws.region.s3
+   VPC: endpoint-vpc
+   Route tables: Select all
+   ```
+
+2. SSM Interface Endpoint:
+   ```
+   Service: com.amazonaws.region.ssm
+   VPC: endpoint-vpc
+   Subnets: Select private subnets
+   Security Group: Create new
+   ```
+
+3. CloudWatch Logs Endpoint:
+   ```
+   Service: com.amazonaws.region.logs
+   VPC: endpoint-vpc
+   Subnets: Select private subnets
+   Security Group: Create new
+   ```
+
+Step 3: Test Endpoints
+1. Launch EC2 in private subnet
+2. Test AWS CLI commands:
+   ```bash
+   aws s3 ls
+   aws ssm get-parameter
+   aws logs describe-log-groups
+   ```
+```
+
+=================================================================
+
+### Demo-5: VPC with Transit Gateway
+
+```bash
+Step 1: Create Three VPCs
+1. Spoke VPC 1:
+   ```
+   Name: spoke1-vpc
+   CIDR: 10.1.0.0/16
+   Subnets:
+     - Public: 10.1.1.0/24
+     - Private: 10.1.2.0/24
+   ```
+
+2. Spoke VPC 2:
+   ```
+   Name: spoke2-vpc
+   CIDR: 10.2.0.0/16
+   Subnets:
+     - Public: 10.2.1.0/24
+     - Private: 10.2.2.0/24
+   ```
+
+3. Shared Services VPC:
+   ```
+   Name: shared-vpc
+   CIDR: 10.0.0.0/16
+   Subnets:
+     - Public: 10.0.1.0/24
+     - Private: 10.0.2.0/24
+   ```
+
+Step 2: Create Transit Gateway
+1. TGW Configuration:
+   ```
+   Name: demo-tgw
+   Description: Demo Transit Gateway
+   Amazon ASN: 65000
+   DNS support: enabled
+   VPN ECMP support: enabled
+   ```
+
+Step 3: Create TGW Attachments
+1. For each VPC:
+   ```
+   Attachment type: VPC
+   VPC ID: [Select VPC]
+   Subnet selection: Select one subnet per AZ
+   ```
+
+Step 4: Configure Route Tables
+1. TGW Route Table:
+   ```
+   Name: main-rt
+   Associations: All VPC attachments
+   Routes:
+     - 10.0.0.0/8 → TGW attachment
+   ```
+
+2. VPC Route Tables:
+   ```
+   Add route in each VPC:
+   Destination: 10.0.0.0/8
+   Target: TGW attachment
+   ```
+
+Important Notes for All Demos:
+
+1. Free Tier Considerations:
+   - VPC itself is free
+   - NAT Gateway costs money (use NAT Instance for testing)
+   - VPN connections have hourly charges
+   - Transit Gateway has hourly charges
+
+2. Security Best Practices:
+   - Use security groups and NACLs effectively
+   - Implement least privilege access
+   - Regular security audits
+   - Monitor VPC Flow Logs
+
+3. Networking Best Practices:
+   - Plan IP addressing carefully
+   - Use non-overlapping CIDR blocks
+   - Document all networking configurations
+   - Test connectivity thoroughly
+
+4. Clean Up Steps:
+   - Delete EC2 instances
+   - Remove endpoints
+   - Delete VPN connections
+   - Delete Transit Gateway attachments
+   - Delete Transit Gateway
+   - Delete VPCs and associated resources
+
+5. Monitoring:
+   - Enable VPC Flow Logs
+   - Monitor with CloudWatch
+   - Set up alerts for connectivity issues
+   - Regular testing of failover scenarios
