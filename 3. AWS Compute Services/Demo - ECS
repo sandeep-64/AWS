@@ -1,4 +1,4 @@
-DEmo-1: Launch  ECS cluster using Fargate
+Demo-1: Launch  ECS cluster using Fargate
 
  Prerequisites
 - AWS Free Tier Account
