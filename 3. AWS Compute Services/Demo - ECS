@@ -59,41 +59,233 @@ DEmo-1: Launch  ECS cluster using Fargate
 4. Find "Public IP"
 5. Open browser and enter the Public IP
 
- Important Notes:
-1. Cost Management:
-   - Monitor your usage
-   - Delete resources when done:
-     - Stop the service
-     - Delete the cluster
-     - Delete task definitions
+==================================================================
 
-2. Free Tier Limits:
-   - 750 hours per month of compute time
-   - Limited to t2.micro instances
-   - Some services might incur charges
+ Demo-2: ECS with Application Load Balancer (ALB)
 
-3. Troubleshooting:
-   - Check security group settings
-   - Verify task status in Events tab
-   - Monitor CloudWatch logs
+```
+Step 1: Create Application Load Balancer
+1. Go to EC2 → Load Balancers → Create
+   ```
+   Type: Application Load Balancer
+   Name: demo-alb
+   Scheme: internet-facing
+   IP address type: ipv4
+   VPC: default
+   Mappings: select all subnets
+   Security Group: Create new
+     - Allow HTTP 80 from anywhere
+   ```
 
-4. Best Practices:
+2. Configure Listener:
+   ```
+   Protocol: HTTP
+   Port: 80
+   Default action: Create target group
+     Name: demo-tg
+     Target type: IP
+     Protocol: HTTP
+     Port: 80
+     Health check path: /
+   ```
+
+Step 2: Create Task Definition
+1. ECS → Task Definitions → Create new
+   ```
+   Family: demo-web-alb
+   Launch type: FARGATE
+   Task Role: None
+   Network Mode: awsvpc
+   CPU: 0.25 vCPU
+   Memory: 0.5GB
+   Container Definition:
+     Name: nginx-alb
+     Image: nginx:latest
+     Port mappings: 80
+     Essential: Yes
+   ```
+
+Step 3: Create Service
+1. Launch Type: FARGATE
+2. Service name: web-alb-service
+3. Number of tasks: 2
+4. Networking:
+   ```
+   VPC: default
+   Subnets: select all
+   Security group: Allow 80 from ALB
+   ```
+5. Load Balancer:
+   ```
+   Type: Application Load Balancer
+   Target group: demo-tg
+   ```
+
+Step 4: Test
+- Access ALB DNS name in browser
+```
+
+==================================================================
+
+ Demo-3: ECS with Blue/Green Deployment
+
+```
+Step 1: Task Definition (Version 1 - Blue)
+1. Create task definition:
+   ```
+   Family: demo-blue-green
+   Launch type: FARGATE
+   CPU: 0.25 vCPU
+   Memory: 0.5GB
+   Container:
+     Name: web-app
+     Image: httpd:2.4
+     Port: 80
+   ```
+
+Step 2: Create CodeDeploy Application
+1. Go to CodeDeploy → Applications
+2. Create application:
+   ```
+   Name: demo-ecs-deploy
+   Compute platform: ECS
+   ```
+
+Step 3: Create Service
+1. Service configuration:
+   ```
+   Launch type: FARGATE
+   Service name: blue-green-service
+   Tasks: 1
+   Deployment type: Blue/Green
+   ```
+2. Load balancer:
+   ```
+   Create new ALB
+   Listener port: 80
+   Target group: Create two (blue/green)
+   ```
+
+Step 4: Update Deployment (Version 2 - Green)
+1. Create new task definition revision:
+   ```
+   Same as before but use nginx:latest
+   ```
+2. Update service with new version
+3. Monitor deployment in CodeDeploy
+```
+
+==================================================================
+
+ Demo-4: ECS with Auto Scaling
+
+```
+Step 1: Task Definition
+1. Create basic task:
+   ```
+   Family: demo-scaling
+   Launch type: FARGATE
+   CPU: 0.25 vCPU
+   Memory: 0.5GB
+   Container:
+     Name: scaling-app
+     Image: nginx:latest
+     Port: 80
+   ```
+
+Step 2: Create Service with Auto Scaling
+1. Service configuration:
+   ```
+   Launch type: FARGATE
+   Service name: scaling-service
+   Tasks: 1
+   ```
+2. Auto Scaling configuration:
+   ```
+   Minimum tasks: 1
+   Maximum tasks: 4
+   Scale out: 
+     - CPU >= 75% for 3 minutes
+     - Add 1 task
+   Scale in:
+     - CPU <= 25% for 3 minutes
+     - Remove 1 task
+   ```
+
+Step 3: Test Auto Scaling
+1. Use Apache Bench or similar tool
+2. Monitor scaling events
+```
+
+==================================================================
+
+ Demo-5: ECS with Environment Variables and Secrets
+
+```
+Step 1: Create Secret
+1. Go to AWS Secrets Manager
+2. Create new secret:
+   ```
+   Name: demo-app-secret
+   Key/value:
+     DB_PASSWORD: mypassword123
+   ```
+
+Step 2: Task Definition with Environment Variables
+1. Create task definition:
+   ```
+   Family: demo-env-vars
+   Launch type: FARGATE
+   CPU: 0.25 vCPU
+   Memory: 0.5GB
+   Container:
+     Name: env-app
+     Image: nginx:latest
+     Port: 80
+     Environment variables:
+       APP_ENV: development
+       API_URL: http://api.example.com
+     Secrets:
+       DB_PASSWORD: demo-app-secret
+   ```
+
+Step 3: Create Service
+1. Basic service setup:
+   ```
+   Launch type: FARGATE
+   Service name: env-service
+   Tasks: 1
+   ```
+2. Networking:
+   ```
+   VPC: default
+   Security group: Allow 80
+   ```
+
+Step 4: Verify Configuration
+1. Connect to container
+2. Check environment variables
+```
+
+Important Notes for All Demos:
+1. Free Tier Limitations:
+   - Stay within 750 hours/month
    - Use minimal resources
-   - Clean up unused resources
-   - Monitor AWS Billing dashboard
+   - Monitor AWS billing
 
- Common Issues and Solutions:
-1. If task fails to start:
-   - Check CPU/Memory allocation
-   - Verify network configuration
-   - Review security group settings
+2. Clean Up After Testing:
+   - Delete services
+   - Delete task definitions
+   - Remove load balancers
+   - Delete secrets
+   - Remove auto scaling rules
 
-2. If can't access application:
-   - Verify security group allows port 80
-   - Check if task is in RUNNING state
-   - Confirm public IP is accessible
+3. Security Best Practices:
+   - Use minimal permissions
+   - Secure sensitive data
+   - Regular security group reviews
 
-3. If experiencing high latency:
-   - Check subnet configuration
-   - Verify region settings
-   - Monitor resource utilization
+4. Cost Management:
+   - Stop services when not in use
+   - Monitor resource usage
+   - Set up billing alerts
