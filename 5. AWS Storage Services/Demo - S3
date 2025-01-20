@@ -21,17 +21,7 @@ Detailed Steps:
    f. Click "Upload"
    ```
 
-3. Create Folder Structure
-   ```
-   a. Click "Create folder"
-   b. Create these folders:
-      - documents
-      - images
-      - backups
-   c. Enter folder → Upload specific files to each
-   ```
-
-4. File Operations
+3. File Operations
    ```
    a. Select a file → Click "Download"
    b. Select a file → Click "Copy URL"
@@ -39,7 +29,7 @@ Detailed Steps:
    d. Select a file → Click "Move" to transfer between folders
    ```
 
-5. Clean Up
+4. Clean Up
    ```
    a. Select all files → Delete
    b. Empty the folders
