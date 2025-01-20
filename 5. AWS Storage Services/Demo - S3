@@ -59,8 +59,9 @@ Detailed Steps:
    ```
    a. Click "Upload" → Add files
    b. Before uploading, click on a file
-   c. Click "Additional upload options"
-   d. Add metadata:
+   c. Click on drop-down for properties
+   d. Click on metadata (optional):
+      - Type: user-defined
       - Key: "project"
       - Value: "demo"
    e. Add tags:
@@ -74,15 +75,6 @@ Detailed Steps:
    b. Select multiple files
    c. Use "Actions" dropdown
    d. Try: Download, Move, Copy
-   ```
-
-5. Search and Filter
-   ```
-   a. Use search bar with:
-      - Filename
-      - Extension
-      - Tags
-   b. Use filters in left sidebar
    ```
 
 ### Demo 3: Versioning System
