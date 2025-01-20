@@ -92,7 +92,7 @@ Detailed Steps:
    ```
    a. Create test.txt with content "Version 1"
    b. Upload to bucket
-   c. Note the version ID in Properties
+   c. click on the file and find version ID in Version section
    ```
 
 3. Create Versions
